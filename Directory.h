@@ -14,7 +14,7 @@ struct ListNode
     char* name;
     ListNode* next;
     char* alias;
-}
+};
 
 struct Node
 {
@@ -23,17 +23,26 @@ struct Node
     Node* FirstChild;
     Node* Sibling; 
     bool type;
-    PtrListNode Children;
-}
+    //PtrListNode Children;
+};
+
+// struct TreeNode
+// {
+//     TreeNode* Parent;
+//     char *name;
+//     PtrListNode Children;
+//     bool type;
+// };
+
 
 struct Tree
 {
     Node* root;
-}
+};
 
 struct HashTable
 {
-}
+};
 
 PtrListNode MakeList();
 
@@ -42,11 +51,13 @@ PtrTable MakeTable();
 void MakeNode(PtrTree root, char *name);
 PtrTree MakeTree();
 PtrNode Find(char* Prefix);
-PtrNode Add(PtrTree root, char* name);
+PtrNode AddFile(PtrNode current,PtrTree root, char* name);
+PtrNode AddDirectory(PtrNode current, PtrTree root. char* name);
 PtrNode Move(PtrTree root,PtrNode name);
 int getHash(char* name);
 int LookinTable(char* name, PtrTable Table);
 PtrNode Teleport(char* alias);
+void StoreAlias(char* Address, char* Alias);
 void Quit();
 
 
