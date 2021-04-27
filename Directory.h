@@ -1,8 +1,13 @@
 #ifndef __DIRECTORY__H
 #define __DIRECTORY__H
+#include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
 
 typedef struct Node Node;
 typedef struct Node* PtrNode;
+typedef struct Tree Tree;
 typedef struct Tree* PtrTree;
 typedef struct ListNode ListNode;
 typedef struct ListNode* PtrListNode;
@@ -19,7 +24,7 @@ struct ListNode
 struct Node
 {
     Node* Parent;
-    char *name;
+    char* name;
     Node* FirstChild;
     Node* Sibling; 
     bool type;
@@ -45,21 +50,20 @@ struct HashTable
 };
 
 PtrListNode MakeList();
-
 PtrListNode MakeList();
 PtrTable MakeTable();
-void MakeNode(PtrTree root, char *name);
+Node* MakeNode(Node* parentAddress ,PtrTree root, char *inputString , bool inputType);
 PtrTree MakeTree();
 
 PtrNode Find(char* Prefix);
 
-PtrNode AddFile(PtrNode current,PtrTree root, char* name);
-PtrNode AddDirectory(PtrNode current, PtrTree root, char* name);
+PtrNode AddFile(PtrNode current,PtrTree root, char* inputString);
+PtrNode AddDirectory(PtrNode current, PtrTree root, char* inputString);
 
-PtrNode Move(PtrTree root,PtrNode name);
+PtrNode Move(PtrTree root,PtrNode inputString);
 
-int getHash(char* name);
-int LookinTable(char* name, PtrTable Table);
+int getHash(char* inputString);
+int LookinTable(char* inputString, PtrTable Table);
 
 PtrNode Teleport(char* alias);
 void StoreAlias(char* Address, char* Alias);
