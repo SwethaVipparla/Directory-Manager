@@ -1,16 +1,21 @@
 #ifndef __DIRECTORY__H
 #define __DIRECTORY__H
+
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 
 typedef struct Node Node;
 typedef struct Node* PtrNode;
+
 typedef struct Tree Tree;
 typedef struct Tree* PtrTree;
+
 typedef struct ListNode ListNode;
 typedef struct ListNode* PtrListNode;
+
 typedef struct HashTable HashTable;
 typedef struct HashTable* PtrTable;
 
@@ -52,15 +57,16 @@ struct HashTable
 PtrListNode MakeList();
 PtrListNode MakeList();
 PtrTable MakeTable();
-Node* MakeNode(Node* parentAddress ,PtrTree root, char *inputString , bool inputType);
+
+Node* MakeNode(Node* parentAddress, PtrTree root, char *inputString, bool inputType);
 PtrTree MakeTree();
 
 PtrNode Find(char* Prefix);
 
-PtrNode AddFile(PtrNode current,PtrTree root, char* inputString);
-PtrNode AddDirectory(PtrNode current, PtrTree root, char* inputString);
+PtrNode AddFile(PtrNode current, PtrTree root, char* inputName);
+PtrNode AddDirectory(PtrNode current, PtrTree root, char* inputName);
 
-PtrNode Move(PtrTree root,PtrNode inputString);
+PtrNode Move(PtrTree root, PtrNode inputString);
 
 int getHash(char* inputString);
 int LookinTable(char* inputString, PtrTable Table);
