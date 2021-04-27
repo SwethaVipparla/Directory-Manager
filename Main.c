@@ -9,11 +9,11 @@ int main()
 
     for(int i = 0; i < queries; i++)
     {
-        printf("Press 1 to Add file\n");
-        printf("Press 2 to Add Directory\n");
-        printf("Press 3 to move to another Directory\n");
-        printf("Press 4 to store address of a file as an Alias\n");
-        printf("Press 5 to teleport to an Alias\n");
+        printf("Press 1 to Add file/directory\n");
+        printf("Press 2 to move to another Directory\n");
+        printf("Press 3 to store address of a file as an Alias\n");
+        printf("Press 4 to teleport to an Alias\n");
+        printf("Press 5 to find a file/directory with a prefix\n");
         printf("Press 6 to Quit the function\n");
 
         int n;
@@ -23,21 +23,19 @@ int main()
         {
             case 1:
             {
-                char* name;
-                scanf("%s", name);
-                AddFile(current,root,name);
+                char* inputName;
+                char inputType[20];
+                scanf("%s %s", inputType, inputName);
+
+                if(strcmp(inputType, "file") == 0)
+                    AddFile(current, root, inputName);
+                    
+                else if(strcmp(inputType, "directory") == 0)
+                    AddDirectory(current, root, inputName);
             }
                 break;
 
             case 2:
-            {
-                char* name;
-                scanf("%s", name);
-                AddDirectory(current, root, name);
-            }
-                break;
-
-            case 3:
             {
                 char nextDirectory[256];
                 fgets(nextDirectory, 256, stdin);
@@ -45,7 +43,7 @@ int main()
             }
                 break;
 
-            case 4:
+            case 3:
             {
                 //PtrNode Address;
                 char Address[256];
@@ -56,7 +54,7 @@ int main()
             }
                 break;
 
-            case 5:
+            case 4:
             {
                 char Alias[256];
                 scanf("%s", Alias);
