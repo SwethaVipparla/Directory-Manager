@@ -50,16 +50,20 @@ PtrListNode MakeList();
 PtrTable MakeTable();
 void MakeNode(PtrTree root, char *name);
 PtrTree MakeTree();
+
 PtrNode Find(char* Prefix);
+
 PtrNode AddFile(PtrNode current,PtrTree root, char* name);
-PtrNode AddDirectory(PtrNode current, PtrTree root. char* name);
+PtrNode AddDirectory(PtrNode current, PtrTree root, char* name);
+
 PtrNode Move(PtrTree root,PtrNode name);
+
 int getHash(char* name);
 int LookinTable(char* name, PtrTable Table);
+
 PtrNode Teleport(char* alias);
 void StoreAlias(char* Address, char* Alias);
+
 void Quit();
-
-
 
 #endif
