@@ -19,60 +19,68 @@ Node *MakeNode(Node *parentAddress, PtrTree root, char *inputString, bool inputT
     N->name = (char *)malloc(sizeof(char) * strlen(inputString));
     N->Parent = parentAddress;
     N->Sibling = parentAddress->FirstChild;
-    parentAddress->FirstChild=N;
+    parentAddress->FirstChild = N;
     N->type = inputType;
     return N;
 }
 
 void AddFile(PtrNode current, PtrTree root, char *inputString)
 {
-    Node *File = MakeNode(current, root, inputString, 1);//file inputType is 1
+    Node *File = MakeNode(current, root, inputString, 1); //file inputType is 1
 }
-void AddDirectory(PtrNode current, PtrTree root, char* inputString)
+void AddDirectory(PtrNode current, PtrTree root, char *inputString)
 {
-    Node* Folder = MakeNode(current, root, inputString, 0);//directory inputType is 0
+    Node *Folder = MakeNode(current, root, inputString, 0); //directory inputType is 0
 }
 
-PtrNode search (PtrNode current , char* array)
+PtrNode search(PtrNode current, char *array)
 {
-    if(current->type==1)
+    if (current->type == 1)
     {
         return NULL;
     }
     PtrNode head = current->FirstChild;
-    while(head!=NULL)
+    while (head != NULL)
     {
-        if(strcmp(head->name , array)==0)
+        if (strcmp(head->name, array) == 0)
         {
             return head;
         }
-        head=head->Sibling;
+        head = head->Sibling;
     }
     return NULL;
 }
 
-PtrNode Move(PtrTree root,char* inputString)
+PtrNode Move(PtrTree root, char *inputString)
 {
     PtrNode parent = root;
     PtrNode current = root;
-    int j=0;
-    while(inputString[j]!='\0')
+    char array[100];
+    for (int i = 0, j = 0; i < strlen(inputString); i++, j++)
     {
-        int i=0;
-        char array[100];
-        while(inputString[j+i]!='/')
+        if (inputString[i] == '/')
         {
-            array[i]=inputString[j+i];
-            i++;
+            array[j] = '\0';
+            current = search(current, array);
+            if (current == NULL)
+            {
+                printf("Error\n");
+                return NULL;
+            }
+            j = -1;
+            continue;
         }
-        array[i]='\0';
-        current = search(current , array);
-        if(current==NULL)
+        array[j] = inputString[i];
+        if (i == strlen(inputString) - 1)
         {
-            printf("Error\n");
-            return NULL;
+            array[++j] = '\0';
+            current = search(current, array);
+            if (current == NULL)
+            {
+                printf("Error\n");
+                return NULL;
+            }
         }
-        j += i+1;
     }
     return current;
 }
