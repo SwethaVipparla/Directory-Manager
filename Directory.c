@@ -101,6 +101,30 @@ void StoreAliasSafety(PtrTree root,char* Address,char* Alias)
     strcpy(input->Alias,Alias);
 }
 
+void PrintTree(PtrTree root)
+{
+    PtrNode current = root;
+    current = current->FirstChild;
+    if(current==NULL)
+    {
+     return;   
+    }
+
+    PtrNode temp = current;
+
+    while(current!=NULL)
+    {
+        temp = current;
+    while(temp!=NULL)
+    {
+        printf("%s--->",temp->name);
+        temp = temp->FirstChild;
+    }
+    current = current->Sibling;
+    }
+    return;
+}
+
 void Quit()
 {
     printf("Goodbye\n");

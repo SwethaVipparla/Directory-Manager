@@ -61,6 +61,7 @@ int LookinTable(char* inputString, PtrTable Table);
 PtrNode Teleport(char* alias);
 void StoreAlias(PtrTree root,char* Address, char* Alias,HT2* AliasHashTable);
 void StoreAliasSafety(PtrTree root,char* Address,char* Alias);
+void PrintTree(PtrTree root);
 void Quit();
 
 #endif
