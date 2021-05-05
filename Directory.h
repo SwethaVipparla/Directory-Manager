@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 
 typedef struct Node Node;
 typedef struct Node* PtrNode;
@@ -52,15 +53,16 @@ struct HashTable
 PtrListNode MakeList();
 PtrListNode MakeList();
 PtrTable MakeTable();
-Node* MakeNode(Node* parentAddress ,PtrTree root, char *inputString , bool inputType);
+Node* MakeNode(Node* parentAddress ,PtrTree Tree, char *inputString , bool inputType);
 PtrTree MakeTree();
 
 PtrNode Find(char* Prefix);
+PtrNode search(PtrNode current, char *array);
 
-void AddFile(PtrNode current, PtrTree root, char *inputString);
-void AddDirectory(PtrNode current, PtrTree root, char* inputString);
+void AddFile(PtrNode current, PtrTree Tree, char *inputString);
+void AddDirectory(PtrNode current, PtrTree Tree, char* inputString);
 
-PtrNode Move(PtrTree root,char* inputString);
+PtrNode Move(PtrTree Tree,char* inputString);
 
 int getHash(char* inputString);
 int LookinTable(char* inputString, PtrTable Table);
