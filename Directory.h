@@ -63,8 +63,8 @@ PtrTree MakeTree();
 
 PtrNode Find(char* Prefix);
 
-PtrNode AddFile(PtrNode current, PtrTree root, char* inputName);
-PtrNode AddDirectory(PtrNode current, PtrTree root, char* inputName);
+void AddFile(PtrNode current, PtrTree root, char* inputName);
+void AddDirectory(PtrNode current, PtrTree root, char* inputName);
 
 PtrNode Move(PtrTree root, PtrNode inputString);
 
