@@ -54,15 +54,17 @@ PtrNode Find(char* Prefix);
 void AddFile(PtrNode current, PtrTree root, char *inputString);
 void AddDirectory(PtrNode current, PtrTree root, char* inputString);
 
-PtrNode Move(PtrTree root,char* inputString);
+PtrNode search(PtrNode current, char *array);
+PtrNode Move(PtrTree Tree,char* inputString);
 
 int getHash(char* inputString);
 int LookinTable(char* inputString, PtrTable Table);
+HT2** MakeHashTable();
 
-PtrNode Teleport(char* alias, HT2* AliasHashTable);
+PtrNode Teleport(PtrTree Tree , char* alias, HT2** AliasHashTable);
 PtrNode TeleportSafety(char* alias, PtrTree root);
 
-void StoreAlias(PtrTree root,char* Address, char* Alias, HT2* AliasHashTable);
+void StoreAlias(PtrTree Tree,char* Address, char* Alias, HT2** AliasHashTable);
 void StoreAliasSafety(PtrTree root,char* Address,char* Alias);
 void Quit();
 
