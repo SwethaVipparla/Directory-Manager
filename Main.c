@@ -20,17 +20,17 @@ int main(void)
   
   while (1)
   {
-    printf("Enter your choice\n");
+    printf("\nEnter your choice\n");
     scanf("%s", command);
 
     if (strcmp("ADD", command) == 0 || strcmp("Add", command) == 0 || strcmp("add", command) == 0)
     {
       char type[10];
 
-      printf("Directory(di) or file(fi)?\n");
+      printf("\nDirectory(di) or file(fi)?\n");
       scanf("%s", type);
 
-      printf("Enter the name\n");
+      printf("\nEnter the name\n");
       scanf("%s", Elements[i]);
 
       if (strcmp("di", type) == 0)
@@ -51,16 +51,16 @@ int main(void)
     {
       char path[1000];
 
-      printf("Enter the path\n");
+      printf("\nEnter the path\n");
       scanf(" %s", path);
 
       PtrNode N = Move(Tree, path);
 
       if (N)
       {
-        // printf(GREEN);
-        printf("The current directory has been changed from '%s' to '%s'\n", current->name, N->name);
-        // printf(RESET);
+        printf(GREEN);
+        printf("\nThe current directory has been changed from '%s' to '%s'\n", current->name, N->name);
+        printf(RESET);
 
         current = N;
       }
@@ -70,10 +70,10 @@ int main(void)
     {
       char alias[1000], path[1000];
 
-      printf("Enter the path\n");
+      printf("\nEnter the path\n");
       scanf("%s", path);
 
-      printf("Enter the alias\n");
+      printf("\nEnter the alias\n");
       scanf("%s", alias);
 
       StoreAlias(Tree, path, alias, HTable);
@@ -83,7 +83,7 @@ int main(void)
     {
       char alias[1000];
 
-      printf("Enter the alias\n");
+      printf("\nEnter the alias\n");
       scanf("%s", alias);
 
       PtrNode N = Teleport(Tree, alias, HTable);
@@ -92,16 +92,16 @@ int main(void)
       {
         if(strcmp(current->name, N->name)==0)
         {
-          // printf(RED);
-          printf("Error: You're already in the %s directory\n", current->name);
-          // printf(RESET);
+          printf(RED);
+          printf("\nError: You're already in the %s directory!\n", current->name);
+          printf(RESET);
         }
 
         else
         {  
-          // printf(GREEN);
-          printf("The current directory has been changed from '%s' to '%s'\n", current->name, N->name);
-          // printf(RESET);
+          printf(GREEN);
+          printf("\nThe current directory has been changed from '%s' to '%s'\n", current->name, N->name);
+          printf(RESET);
         }
 
         current = N;
@@ -129,9 +129,9 @@ int main(void)
 
     else
     {
-      // printf(RED);
-      printf("The command '%s' you entered is invalid. Please enter a valid command to proceed.\n\n", command);
-      // printf(RESET);
+      printf(RED);
+      printf("\nThe command '%s' you entered is invalid. Please enter a valid command to proceed.\n\n", command);
+      printf(RESET);
     }
   }
 }

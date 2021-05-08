@@ -11,9 +11,10 @@ void AddFile(PtrNode current, PtrTree tree, char *inputString)
     if(N == NULL)
     {
         Node *File = MakeNode(current, tree, inputString, 1); // inputType of file is 1
-        //printf(GREEN);
-        printf("A file named '%s' has been added to the current directory '%s'\n", inputString, current->name);
-        //printf(RESET);
+        
+        printf(GREEN);
+        printf("\nA file named '%s' has been added to the current directory '%s'!\n", inputString, current->name);
+        printf(RESET);
     }
 
 }
@@ -27,9 +28,10 @@ void AddDirectory(PtrNode current, PtrTree tree, char *inputString)
     if(N == NULL)
     {
         Node *Folder = MakeNode(current, tree, inputString, 0); // inputType of directory is 0
-        //printf(GREEN);
-        printf("A directory named '%s' has been added to the current directory '%s'\n", inputString, current->name);
-        //printf(RESET);
+        
+        printf(GREEN);
+        printf("\nA directory named '%s' has been added to the current directory '%s'!\n", inputString, current->name);
+        printf(RESET);
     }
 }
 
@@ -52,7 +54,10 @@ PtrNode search(PtrNode current, char *array)
             if (head->type == 1)//If there exists a file with the given name 
             {
                 //Print error message and return NULL
-                printf("You are trying to access a file instead of a directory!\n");
+                printf(RED);
+                printf("Error: You are trying to access a file instead of a directory!\n");
+                printf(RESET);
+
                 return NULL;
             }
             else
@@ -61,7 +66,10 @@ PtrNode search(PtrNode current, char *array)
         head = head->Sibling;
     }
     //There is no member of linkedlist which has the name as as char string given as input.Print message and return
-    printf("There exists no directory named '%s' in parent directory '%s'\n", array, current->name);
+    printf(RED);
+    printf("Error: There exists no directory named '%s' in parent directory! '%s'\n", array, current->name);
+    printf(RESET);
+    
     return NULL;
 }
 
@@ -80,13 +88,19 @@ PtrNode search2(PtrNode current, char *array)
         {
             if (head->type == 1)
             {
-                printf("A file with name '%s' already exists in current directory\n", head->name);
+                printf(RED);
+                printf("\nError: A file with name '%s' already exists in current directory!", head->name);
+                printf(RESET);
+                
                 return head;
             }
 
             else
             {
-                printf("A directory with name '%s' already exists in current directory\n", head->name);
+                printf(RED);
+                printf("\nError: A directory with name '%s' already exists in current directory!", head->name);
+                printf(RESET);
+                
                 return head;
             }
         }
@@ -96,6 +110,7 @@ PtrNode search2(PtrNode current, char *array)
 
     return NULL;
 }
+
 //Changes current directory to any directoryby taking input the complete path to that directory.Handles errors for incorrect paths
 PtrNode Move(PtrTree Tree, char *inputString)
 {
@@ -123,9 +138,9 @@ PtrNode Move(PtrTree Tree, char *inputString)
 
             if (current == NULL)//Message has been printed in search
             {
-                printf("Error\n");
                 return NULL;
             }
+
         L1:
             j = -1;//next iteration j=0 , So array will be re-written from starting index
             continue;
@@ -141,11 +156,11 @@ PtrNode Move(PtrTree Tree, char *inputString)
 
             if (current == NULL)//Message has been printed in search
             {
-                printf("Error\n");
                 return NULL;
             }
         }
     }
+
     return current;//Got the desired directory and returned pointer to it
 }
 
@@ -153,7 +168,10 @@ void StoreAlias(PtrTree Tree, char *Address, char *Alias, HT **AliasHashTable)
 {
     if (searchSepAlias(Alias, AliasHashTable) != NULL)
     {
-        printf("The alias '%s' already exists.\n", Alias);
+        printf(RED);
+        printf("\nError: The alias '%s' already exists!\n", Alias);
+        printf(RESET);
+
         return;
     }
 
@@ -164,7 +182,9 @@ void StoreAlias(PtrTree Tree, char *Address, char *Alias, HT **AliasHashTable)
     
     if (N != NULL)
     {
-        printf("The file/directory at location '%s' has been stored with alias '%s'\n", Address, Alias);
+        printf(GREEN);
+        printf("\nThe file/directory at location '%s' has been stored with alias '%s'!\n", Address, Alias);
+        printf(RESET);
     }
     
     insertSep(Address, AliasHashTable, Alias);
@@ -181,7 +201,10 @@ PtrNode Teleport(PtrTree Tree, char *alias, HT **AliasHashTable)
     
     if (NewAddress == NULL)                             //Error handling : for when the entered alias is not found in the hash table
     {
-        printf("The alias '%s' does not exist.\n", alias);
+        printf(RED);
+        printf("\nThe alias '%s' does not exist!\n", alias);
+        printf(RESET);
+
         return NULL;
     }
     
@@ -263,7 +286,7 @@ void find(char STRING[], int n, char Array[][1000])
 
 void Quit()
 {
-    printf("Goodbye\n");
+    printf("\nGoodbye\n");
     exit(0);
 }
 
@@ -272,10 +295,10 @@ void printManual()
     printf("\n\n*********************************************************************************************\n\n");
     
     printf(BOLD);
-    //printf(MAGENTA);
+    printf(CYAN);
     printf("Welcome to Directory Manager!\n\n");
     printf(NO_BOLD);
-    //printf(RESET);
+    printf(RESET);
 
     printf("Choose one of the following options to continue:\n\n");
 

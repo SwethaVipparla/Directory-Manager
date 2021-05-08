@@ -6,10 +6,10 @@
 
 #define BOLD "\033[1m"
 #define NO_BOLD "\033[22m"
-#define RED "\u001b[31m"
-#define GREEN "\u001b[32m"
-#define MAGENTA "\u001b[35m"
-#define RESET "\u001b[0m"
+#define RED "\033[31m"
+#define GREEN "\033[32m"
+#define CYAN "\033[36m"
+#define RESET "\033[0m"
 
 void AddFile(PtrNode current, PtrTree Tree, char *inputName);
 void AddDirectory(PtrNode current, PtrTree Tree, char *inputName);
