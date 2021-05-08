@@ -1,10 +1,8 @@
 #include "hash.h"
 #include "Directory.h"
+#include "Tree.h"
 #include "Directory.c"
 #include "hash.c"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
 char Elements[1000][1000];
 
@@ -17,24 +15,8 @@ int main(void)
   PtrTree Tree = MakeTree();
   PtrNode current = Tree->root;
 
-  printf("\n\n*********************************************************************************************\n\n \
-          Welcome to Directory Manager!\n\n \
-          Choose one of the following options to continue:\n\n \
-          1. ADD\n \
-          Adds a file or directory\n\n \
-          2. MOVE\n \
-          Changes the current directory to another directory\n\n \
-          3. ALIAS\n \
-          Saves a directory with an alias\n\n \
-          4. TELEPORT\n \
-          Changes the current directory to another directory by taking in an alias\n\n \
-          5. FIND\n \
-          Finds directories and files with a given prefix inside the current directory\n\n \
-          6. QUIT\n \
-          Exit the program\n\n");
-
-  printf("**********************************************************************************************\n\n");
-
+  printManual();
+  
   while (1)
   {
     printf("Enter your choice\n");

@@ -1,10 +1,5 @@
 #include "hash.h"
-//Useless code
-int hash(int x, int tablesize)
-{
 
-    return (x % tablesize);
-}
 //hornersRuleHash:
 //Obtains the hash of the entered string ( the Alias of the component(file/folder) ), using Horner's rule
 int hornersRuleHash(int n, char *word)
@@ -20,48 +15,7 @@ int hornersRuleHash(int n, char *word)
 
     return index;
 }
-//Useless code
-int searchSep(int x, int tablesize, HT *hashtable[])
-{
-    HT *node = hashtable[hash(x, tablesize)];
-    int i = 0;
-    while (node != NULL)
-    {
-        if (node->n == x)
-        {
-            return i;
-        }
-        node = node->next;
-        i++;
-    }
-    return -1;
-}
-//Useless code
-void insertSep(int x, int tablesize, HT *hashtable[])
-{
-    int pos = hash(x, tablesize);
 
-    if (hashtable[pos] == NULL)
-    {
-        hashtable[pos] = (HT *)malloc(sizeof(HT));
-        (hashtable[pos])->n = x;
-        (hashtable[pos])->next = NULL;
-    }
-    else
-    {
-        HT *temp = (HT *)malloc(sizeof(HT));
-        temp->n = x;
-        temp->next = NULL;
-
-        HT *traversal = hashtable[pos];
-
-        while (traversal->next != NULL)
-        {
-            traversal = traversal->next;
-        }
-        traversal->next = temp;
-    }
-}
 //hash2:
 //Obtains the basic hash of the entered string ( the alias of the given component(file/folder) )
 int hash2(char w[])
@@ -74,22 +28,7 @@ int hash2(char w[])
 
     return y;
 }
-//Useless code
-int searchSep2(char x[], HT2 *hashtable[])
-{
-    HT2 *node = hashtable[hornersRuleHash(2003, x)];
-    int i = 0;
-    while (node != NULL)
-    {
-        if ((strcmp(node->Address, x) == 0))
-        {
-            return i;
-        }
-        node = node->next;
-        i++;
-    }
-    return -1;
-}
+
 // searchSepAlias:
 // Searches whether an entered string is stored in the hash table, implemented using separate chaining
 char *searchSepAlias(char x[], HT2 **hashtable)
@@ -107,6 +46,7 @@ char *searchSepAlias(char x[], HT2 **hashtable)
     }
     return NULL; //String not found
 }
+
 //insertSep2:
 //Inserts the details(Alias/Address) of a component(file/folder) into the hash table, implemented using separate chaining
 void insertSep2(char Address[], HT2 **hashtable, char *Alias)
