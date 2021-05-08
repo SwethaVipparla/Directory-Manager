@@ -33,30 +33,34 @@ void AddDirectory(PtrNode current, PtrTree tree, char *inputString)
     }
 }
 
+//Implements one level searching of directories with a given name in the current directory i.e. it will search only the children of 
+//current directory . If not found or a file found , prints message and returns
 PtrNode search(PtrNode current, char *array)
 {
-    if (current->type == 1)
+    if (current->type == 1)//If a file is passed we need not search
     {
         return NULL;
     }
 
-    PtrNode head = current->FirstChild; /// root->c1->c2->c3
-                                        //\c4->c5->6
+    PtrNode head = current->FirstChild;//Pointer to first member of linked list of children . Might be NULL
+
+    //Traversing through the linked list to search for desired directory                                    
     while (head != NULL)
     {
-        if (strcmp(head->name, array) == 0)
+        if (strcmp(head->name, array) == 0)//Names matched
         {
-            if (head->type == 1)
+            if (head->type == 1)//If there exists a file with the given name 
             {
+                //Print error message and return NULL
                 printf("You are trying to access a file instead of a directory!\n");
                 return NULL;
             }
             else
-                return head;
+                return head;// Directory found and returned
         }
         head = head->Sibling;
     }
-
+    //There is no member of linkedlist which has the name as as char string given as input.Print message and return
     printf("There exists no directory named '%s' in parent directory '%s'\n", array, current->name);
     return NULL;
 }
@@ -92,15 +96,14 @@ PtrNode search2(PtrNode current, char *array)
 
     return NULL;
 }
-
+//Changes current directory to any directoryby taking input the complete path to that directory.Handles errors for incorrect paths
 PtrNode Move(PtrTree Tree, char *inputString)
 {
-    char array[1000];
+    char array[10000];
 
-    PtrNode parent = Tree->root;
-    PtrNode current = Tree->root;
+    PtrNode current = Tree->root;//Pointer to root directory
 
-    if (strcmp(inputString, "root") == 0)
+    if (strcmp(inputString, "root") == 0)//If address of root is given we return pointer to root 
     {
         return current;
     }
@@ -109,40 +112,41 @@ PtrNode Move(PtrTree Tree, char *inputString)
     {
         if (inputString[i] == '/')
         {
-            array[j] = '\0';
-
+            array[j] = '\0';//completes the string 
+            //address is like root/x/y.... till i=4 only root/ is present . This is skipped since pointer to root is already there
             if (i == 4)
             {
                 goto L1;
             }
 
-            current = search(current, array);
+            current = search(current, array);//returns pointer to one of the children(if it exists) of current with name as that of array string
 
-            if (current == NULL)
+            if (current == NULL)//Message has been printed in search
             {
                 printf("Error\n");
                 return NULL;
             }
         L1:
-            j = -1;
+            j = -1;//next iteration j=0 , So array will be re-written from starting index
             continue;
         }
 
-        array[j] = inputString[i];
+        array[j] = inputString[i];//copy characters
 
-        if (i == strlen(inputString) - 1)
+        if (i == strlen(inputString) - 1)//last character of string has been copied
         {
-            array[++j] = '\0';
-            current = search(current, array);
+            array[++j] = '\0';//complete the string
 
-            if (current == NULL)
+            current = search(current, array);//returns pointer to one of the children(if it exists) of current with name as that of array string
+
+            if (current == NULL)//Message has been printed in search
             {
                 printf("Error\n");
                 return NULL;
             }
         }
     }
-    return current;
+    return current;//Got the desired directory and returned pointer to it
 }
 
 void StoreAlias(PtrTree Tree, char *Address, char *Alias, HT **AliasHashTable)
