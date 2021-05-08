@@ -83,57 +83,5 @@ int main(void)
     {
       printf("The command '%s' you entered is invalid.Please enter a valid command to proceed.\n", command);
     }
-
-    // char findThis[20];
-    // scanf("%s", findThis);
-
-    // find(findThis, 3, Elements);
   }
-
-  //   char Elements[1000][1000];
-  //   int i=0;
-  //   PtrTree Tree = MakeTree();
-  //   PtrNode current = Tree->root;
-  //   PtrNode start = current;
-  //  // printf("%s\n",start->name);
-  //   AddDirectory(current , Tree ,"Directory1");
-  //   AddDirectory(current , Tree ,"Directory2");
-  //   //traverseTree(Tree->root);
-  //   //PrintTree(Tree->root);
-  //   //printf("%s\n",Tree->root->FirstChild->Sibling->name);
-  //   current = current->FirstChild;
-  //   printf("%s\n",current->name);
-  //   AddDirectory(current , Tree ,"Directory3");
-  //   AddDirectory(current,Tree,"Directory0");
-  //   start = Move(Tree, "root/Directory2");
-  //   printf("%s\n",start->name);
-  //   start = Move(Tree,"root/Directory2/Directory0");
-  //   printf("%s\n",start->name);
-  //   //start =
-
-  //   // current = current->FirstChild;
-
-  //   // printf("%s\n",current->name);
-  //   // AddDirectory(current , Tree ,"Directory4");
-  //   // //PrintTree(Tree->root);
-  //   // AddDirectory(current , Tree ,"Directory5");
-
-  //   // current = current->FirstChild;
-
-  //   // AddDirectory(current,Tree,"Directory100");
-
-  //   // HT2** Htable = MakeHashTable();
-  //   // StoreAlias(Tree , "root/Directory1" , "Alias1" , Htable);
-  //   // StoreAlias(Tree , "root/Directory2" , "Alias2" , Htable);
-  //   // for(int i=0 ; i<69 ; i++)
-  //   // {
-  //   //     if(Htable[i]!=NULL)
-  //   //     {
-  //   //       //  printf("%d\n",i);
-  //   //     }
-  //   // }
-  //   // //printf("%s\n" , Teleport(Tree ,"Alias1",Htable)->Parent->name);
-  //   // //PrintTree(Tree->root);
-  //   // traverseTree(Tree->root);
-  //   // return 0;
 }
