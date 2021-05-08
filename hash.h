@@ -5,16 +5,16 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct Node
+typedef struct node
 {
     int n;
-    struct Node *next;
+    struct node *next;
 
 } HT;
 
 typedef struct Node2
 {
-    char Address[33];
+    char Address[330];
     int n;
     struct Node2 *next;
     char* Alias;
@@ -23,9 +23,11 @@ typedef struct Node2
 
 int hornersRuleHash(int n, char* word);
 void insertSep(int x, int tablesize, HT *hashtable[]);
-void insertSep2(char Address[], HT2 *hashtable[],char* Alias);
+void insertSep2(char Address[], HT2 **hashtable, char* Alias);
+char* searchSepAlias(char x[], HT2 **hashtable);
 
 int searchSep(int x, int tablesize, HT *hashtable[]);
 int searchSep2(char x[], HT2 *hashtable[]);
 
 #endif
+
