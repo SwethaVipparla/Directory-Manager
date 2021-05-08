@@ -135,6 +135,22 @@ void StoreAlias(PtrTree Tree, char *Address, char *Alias, HT2 **AliasHashTable)
     insertSep2(Address, AliasHashTable, Alias);
 }
 
+PtrNode Teleport(PtrTree Tree, char *alias, HT2 **AliasHashTable)
+{
+    char *NewAddress;
+    NewAddress = searchSepAlias(alias, AliasHashTable);
+    if (NewAddress == NULL)
+    {
+        printf("The alias '%s' does not exist", alias);
+        return NULL;
+    }
+    else
+    {
+        PtrNode directory = Move(Tree, NewAddress);
+        return directory;
+    }
+}
+
 void Quit()
 {
     printf("Goodbye\n");

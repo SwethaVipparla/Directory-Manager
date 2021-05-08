@@ -42,9 +42,6 @@ struct Tree
 };
 
 PtrListNode MakeList();
-PtrListNode MakeList();
-PtrTable MakeTable();
-
 Node* MakeNode(Node* parentAddress, PtrTree root, char *inputString, bool inputType);
 PtrTree MakeTree();
 
