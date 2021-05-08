@@ -135,16 +135,20 @@ void StoreAlias(PtrTree Tree, char *Address, char *Alias, HT2 **AliasHashTable)
     insertSep2(Address, AliasHashTable, Alias);
 }
 
+// Teleport : 
+// Teleports to an alias entered by the user, updating the current directory to start from the entered alias
+// Calls the search function, to search up the entered alias in the hash table, and moves to the address of the desired alias
+
 PtrNode Teleport(PtrTree Tree, char *alias, HT2 **AliasHashTable)
 {
     char *NewAddress;
-    NewAddress = searchSepAlias(alias, AliasHashTable);
-    if (NewAddress == NULL)
+    NewAddress = searchSepAlias(alias, AliasHashTable);//Hash search function implemented in hash.c
+    if (NewAddress == NULL) //Error handling : for when the entered alias is not found in the hash table
     {
         printf("The alias '%s' does not exist", alias);
         return NULL;
     }
-    else
+    else //When the entered alias exists, the current directory is updated to the address of the entered alias by the Move function
     {
         PtrNode directory = Move(Tree, NewAddress);
         return directory;
