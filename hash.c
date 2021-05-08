@@ -1,4 +1,3 @@
-
 #include "hash.h"
 
 //Q1 Starts
@@ -9,11 +8,11 @@ int hash(int x, int tablesize)
     return (x % tablesize);
 }
 
-int hornersRuleHash(int n, char* word)
+int hornersRuleHash(int n, char *word)
 {
     int index = 0;
 
-    for(int i = 0; word[i] != 0; i++)
+    for (int i = 0; word[i] != 0; i++)
     {
         index += word[i] - 'A' + 1;
         index *= 33;
@@ -22,7 +21,6 @@ int hornersRuleHash(int n, char* word)
 
     return index;
 }
-
 
 int searchSep(int x, int tablesize, HT *hashtable[])
 {
@@ -78,7 +76,7 @@ int hash2(char w[])
 
 int searchSep2(char x[], HT2 *hashtable[])
 {
-    HT2 *node = hashtable[hash2(x)];
+    HT2 *node = hashtable[hornersRuleHash(2003 , x)];
     int i = 0;
     while (node != NULL)
     {
@@ -92,22 +90,40 @@ int searchSep2(char x[], HT2 *hashtable[])
     return -1;
 }
 
-void insertSep2(char Address[], HT2 *hashtable[],char* Alias)
+char* searchSepAlias(char x[], HT2 **hashtable)
 {
-    int pos = hash2(Address);
+    HT2 *node = hashtable[hornersRuleHash(2003 , x)];
+    int i = 0;
+    while (node != NULL)
+    {
+        if ((strcmp(node->Alias, x) == 0))
+        {
+            return node->Address;
+        }
+        node = node->next;
+        i++;
+    }
+    return NULL;
+}
+
+void insertSep2(char Address[], HT2 **hashtable, char *Alias)
+{
+    int pos = hash2(Alias);
 
     if (hashtable[pos] == NULL)
     {
         hashtable[pos] = (HT2 *)malloc(sizeof(HT2));
+        hashtable[pos]->Alias = malloc(sizeof(char)*strlen(Alias));
         strcpy((hashtable[pos])->Address, Address);
-        strcpy((hashtable[pos])->Alias,Alias);
+        strcpy((hashtable[pos])->Alias, Alias);
         (hashtable[pos])->next = NULL;
     }
     else
     {
         HT2 *temp = (HT2 *)malloc(sizeof(HT2));
+        temp->Alias=(char*) malloc(sizeof(char)*strlen(Alias));
         strcpy(temp->Address, Address);
-        strcpy(temp->Alias,Alias);
+        strcpy(temp->Alias, Alias);
         temp->next = NULL;
 
         HT2 *traversal = hashtable[pos];
@@ -119,4 +135,3 @@ void insertSep2(char Address[], HT2 *hashtable[],char* Alias)
         traversal->next = temp;
     }
 }
-//Q2 ends
