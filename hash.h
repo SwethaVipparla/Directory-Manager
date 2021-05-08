@@ -17,14 +17,14 @@ typedef struct Node2
     char Address[330];
     int n;
     struct Node2 *next;
-    char* Alias;
+    char *Alias;
 
 } HT2;
 
-int hornersRuleHash(int n, char* word);
+int hornersRuleHash(int n, char *word);
 void insertSep(int x, int tablesize, HT *hashtable[]);
-void insertSep2(char Address[], HT2 **hashtable,char* Alias);
-char* searchSepAlias(char x[], HT2 **hashtable);
+void insertSep2(char Address[], HT2 **hashtable, char *Alias);
+char *searchSepAlias(char x[], HT2 **hashtable);
 
 int searchSep(int x, int tablesize, HT *hashtable[]);
 int searchSep2(char x[], HT2 *hashtable[]);
