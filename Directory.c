@@ -1,5 +1,6 @@
 #include "Directory.h"
 #include "hash.h"
+#include "Tree.h"
 
 void AddFile(PtrNode current, PtrTree root, char *inputString)
 {

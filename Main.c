@@ -1,8 +1,9 @@
-#include "hash.h"
-#include "Directory.h"
 #include "Tree.h"
-#include "Directory.c"
+#include "Tree.c"
+#include "hash.h"
 #include "hash.c"
+#include "Directory.h"
+#include "Directory.c"
 
 char Elements[1000][1000];
 
@@ -73,7 +74,7 @@ int main(void)
       StoreAlias(Tree, path, alias, HTable);
     }
 
-    else if (strcmp("TELEPORT", command) == 0)
+    else if (strcmp("TELEPORT", command) == 0 || strcmp("Teleport", command) == 0 || strcmp("teleport", command) == 0)
     {
       char alias[100];
 
