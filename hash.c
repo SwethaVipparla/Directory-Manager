@@ -1,7 +1,5 @@
 #include "hash.h"
 
-//Q1 Starts
-
 int hash(int x, int tablesize)
 {
 

@@ -112,6 +112,29 @@ PtrNode Move(PtrTree Tree, char *inputString)
     return current;
 }
 
+HT2 **MakeHashTable()
+{
+    struct Node2 **HT2 = (struct Node2 **)malloc(sizeof(struct Node2 *) * 2003);
+    for (int i = 0; i < 2003; i++)
+    {
+        HT2[i] = NULL;
+    }
+
+    return HT2;
+}
+
+void StoreAlias(PtrTree Tree, char *Address, char *Alias, HT2 **AliasHashTable)
+{
+    PtrNode N = Move(Tree, Address);
+    if (N == NULL)
+        return;
+    if (N != NULL)
+    {
+        printf("The file/directory at location '%s' has been stored with alias '%s'\n", Address, Alias);
+    }
+    insertSep2(Address, AliasHashTable, Alias);
+}
+
 void Quit()
 {
     printf("Goodbye\n");
