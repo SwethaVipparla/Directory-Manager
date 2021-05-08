@@ -1,7 +1,5 @@
 #include "hash.h"
 
-//Q1 Starts
-
 int hash(int x, int tablesize)
 {
 
@@ -76,7 +74,7 @@ int hash2(char w[])
 
 int searchSep2(char x[], HT2 *hashtable[])
 {
-    HT2 *node = hashtable[hornersRuleHash(2003, x)];
+    HT2 *node = hashtable[hornersRuleHash(2003 , x)];
     int i = 0;
     while (node != NULL)
     {
@@ -90,9 +88,9 @@ int searchSep2(char x[], HT2 *hashtable[])
     return -1;
 }
 
-char *searchSepAlias(char x[], HT2 **hashtable)
+char* searchSepAlias(char x[], HT2 **hashtable)
 {
-    HT2 *node = hashtable[hornersRuleHash(2003, x)];
+    HT2 *node = hashtable[hornersRuleHash(2003 , x)];
     int i = 0;
     while (node != NULL)
     {
@@ -113,7 +111,7 @@ void insertSep2(char Address[], HT2 **hashtable, char *Alias)
     if (hashtable[pos] == NULL)
     {
         hashtable[pos] = (HT2 *)malloc(sizeof(HT2));
-        hashtable[pos]->Alias = malloc(sizeof(char) * strlen(Alias));
+        hashtable[pos]->Alias = malloc(sizeof(char)*strlen(Alias));
         strcpy((hashtable[pos])->Address, Address);
         strcpy((hashtable[pos])->Alias, Alias);
         (hashtable[pos])->next = NULL;
@@ -121,7 +119,7 @@ void insertSep2(char Address[], HT2 **hashtable, char *Alias)
     else
     {
         HT2 *temp = (HT2 *)malloc(sizeof(HT2));
-        temp->Alias = (char *)malloc(sizeof(char) * strlen(Alias));
+        temp->Alias=(char*) malloc(sizeof(char)*strlen(Alias));
         strcpy(temp->Address, Address);
         strcpy(temp->Alias, Alias);
         temp->next = NULL;
