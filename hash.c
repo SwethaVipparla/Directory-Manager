@@ -74,7 +74,7 @@ int hash2(char w[])
 
     return y;
 }
-
+//Useless code
 int searchSep2(char x[], HT2 *hashtable[])
 {
     HT2 *node = hashtable[hornersRuleHash(2003, x)];
@@ -111,7 +111,7 @@ char *searchSepAlias(char x[], HT2 **hashtable)
 //Inserts the details(Alias/Address) of a component(file/folder) into the hash table, implemented using separate chaining
 void insertSep2(char Address[], HT2 **hashtable, char *Alias)
 {
-    int pos = hash2(Alias); //Obtains the hash of the Alias of the file/folder, can have multiple alias'es with same hash, but all corresponding to different addresses
+    int pos = hornersRuleHash(2003, Alias); //Obtains the hash of the Alias of the file/folder, can have multiple alias'es with same hash, but all corresponding to different addresses
 
     if (hashtable[pos] == NULL) //Node in hash table is empty, inseart details into the head
     {

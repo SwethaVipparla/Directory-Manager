@@ -1,5 +1,7 @@
 #include "hash.h"
 #include "Directory.h"
+#include "Directory.c"
+#include "hash.c"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -15,7 +17,7 @@ int main(void)
   PtrTree Tree = MakeTree();
   PtrNode current = Tree->root;
 
-  printf("*********************************************************************************************\n\n \
+  printf("\n\n*********************************************************************************************\n\n \
           Welcome to Directory Manager!\n\n \
           Choose one of the following options to continue:\n\n \
           1. ADD\n \
@@ -98,9 +100,16 @@ int main(void)
 
       PtrNode N = Teleport(Tree, alias, HTable);
 
-      if (!N)
+      if (N)
       {
+        if(strcmp(current->name, N->name)==0)
+        {
+        printf("You're already in the %s directory\n", current->name);
+        }
+        else
+        {  
         printf("The current directory has been changed from '%s' to '%s'\n", current->name, N->name);
+        }
         current = N;
       }
     }
@@ -111,10 +120,11 @@ int main(void)
 
       printf("Enter the prefix\n");
       scanf("%s", prefix);
+      printf("In current directory:\n\n");
 
       traverseTree(current->FirstChild, prefix);
 
-      printf("\nIn complete manager\n");
+      printf("\n\nIn complete manager:\n\n");
       find(prefix, strlen(prefix), Elements);
     }
 
