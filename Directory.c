@@ -151,6 +151,66 @@ PtrNode Teleport(PtrTree Tree, char *alias, HT2 **AliasHashTable)
     }
 }
 
+void traverseTree(PtrNode root, char *prefix)
+{
+    if (root == NULL)
+        return;
+
+    while (root)
+    {
+        int m=1;
+        for (int i = 0; i < strlen(prefix); i++)
+        {
+            if (root->name[i] == prefix[i])
+            {
+                m++;
+            }
+            else
+            {
+                break;
+            }
+        }
+        if (m == strlen(prefix) + 1)
+        {
+            printf("%s\n",root->name);
+        }
+        if (root->FirstChild)
+            traverseTree(root->FirstChild , prefix);
+        root = root->Sibling;
+    }
+}
+
+void find(char STRING[], int n, char Array[][1000])
+{
+
+    int len = n;
+    //hash_for_find[];
+    int j = 0;
+    while (j < 10) //Number of inputs
+    {
+
+        int m = 1;
+
+        for (int i = 0; i < len; i++)
+        {
+            if (Array[j][i] == STRING[i])
+            {
+                m++;
+            }
+            else
+            {
+                break;
+            }
+        }
+        if (m == len + 1)
+        {
+            printf("%s\n", Array[j]);
+        }
+        j++;
+    }
+    //optimiztion can be done with the while loop as for how many times to run it
+}
+
 void Quit()
 {
     printf("Goodbye\n");

@@ -64,7 +64,6 @@ void StoreAlias(PtrTree Tree, char *Address, char *Alias, HT2 **AliasHashTable);
 void StoreAliasSafety(PtrTree Tree, char *Address, char *Alias);
 
 void find(char STRING[], int n, char Array[][1000]);
-
 void traverseTree(PtrNode root, char *prefix);
 
 void Quit();
