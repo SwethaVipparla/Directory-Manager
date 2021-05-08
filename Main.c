@@ -1,72 +1,87 @@
+#include "hash.h"
 #include "Directory.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-int main()
+char Elements[1000][1000];
+
+int main(void)
 {
-    int queries;
-    printf("Enter the number of commands you wish to perform\n");
-    scanf("%d", queries);
-    PtrTree root = MakeTree();
+  int i = 0;
+  char command[20];
+  HT2 **HTable = MakeHashTable();
 
-    for(int i = 0; i < queries; i++)
+  PtrTree Tree = MakeTree();
+  PtrNode current = Tree->root;
+
+  while (1)
+  {
+    scanf("%s", command);
+
+    if (strcmp("ADD", command) == 0)
     {
-        printf("Press 1 to Add file/directory\n");
-        printf("Press 2 to move to another Directory\n");
-        printf("Press 3 to store address of a file as an Alias\n");
-        printf("Press 4 to teleport to an Alias\n");
-        printf("Press 5 to find a file/directory with a prefix\n");
-        printf("Press 6 to Quit the function\n");
-
-        int n;
-        scanf("%d", &n);
-
-        switch(n)
-        {
-            case 1:
-            {
-                char* inputName;
-                char inputType[20];
-                scanf("%s %s", inputType, inputName);
-
-                if(strcmp(inputType, "file") == 0)
-                    AddFile(current, root, inputName);
-                    
-                else if(strcmp(inputType, "directory") == 0)
-                    AddDirectory(current, root, inputName);
-            }
-                break;
-
-            case 2:
-            {
-                char nextDirectory[256];
-                fgets(nextDirectory, 256, stdin);
-                Move(root, nextDirectory);
-            }
-                break;
-
-            case 3:
-            {
-                //PtrNode Address;
-                char Address[256];
-                fgets(Address, 256, stdin);
-                char* Alias;
-                scanf("%s", Alias);
-                StoreAlias(Address,Alias);
-            }
-                break;
-
-            case 4:
-            {
-                char Alias[256];
-                scanf("%s", Alias);
-                Teleport(Alias);
-            }
-                break;
-
-            case 6:
-            {
-                Quit();
-            }
-                break;
-        }
+      char type[10];
+      scanf("%s %s", type, Elements[i]);
+      if (strcmp("Directory", type) == 0)
+      {
+        AddDirectory(current, Tree, Elements[i]);
+        //printf("%s",Elements[i]);
+        //printf("%s",current->FirstChild->name);
+        printf("A directory named '%s' has been added to the current directory '%s'\n", Elements[i], current->name);
+      }
+      if (strcmp("File", type) == 0)
+      {
+        AddFile(current, Tree, Elements[i]);
+        printf("A file named '%s' has been added to the current directory '%s'\n", Elements[i], current->name);
+      }
+      i++;
     }
+    else if (strcmp("MOVE", command) == 0)
+    {
+      char path[1000];
+      scanf(" %s", path);
+      //printf("--%c--",path[0]);
+      PtrNode N = Move(Tree, path);
+      if (N != NULL)
+      {
+        printf("The current directory has been changed from '%s' to '%s'\n", current->name, N->name);
+        current = N;
+      }
+    }
+    else if (strcmp("ALIAS", command) == 0)
+    {
+      char alias[100];
+      char path[1000];
+      scanf("%s %s", path, alias);
+      StoreAlias(Tree, path, alias, HTable);
+    }
+    else if (strcmp("TELEPORT", command) == 0)
+    {
+      char alias[100];
+      scanf("%s", alias);
+      PtrNode N = Teleport(Tree, alias, HTable);
+      if (N != NULL)
+      {
+        printf("The current directory has been changed from '%s' to '%s'\n", current->name, N->name);
+        current = N;
+      }
+    }
+    else if (strcmp("FIND", command) == 0)
+    {
+      char prefix[100];
+      scanf("%s", prefix);
+      traverseTree(current->FirstChild, prefix);
+      printf("\nIn complete manager\n");
+      find(prefix, strlen(prefix), Elements);
+    }
+    else if (strcmp("QUIT", command) == 0)
+    {
+      Quit();
+    }
+    else
+    {
+      printf("The command '%s' you entered is invalid.Please enter a valid command to proceed.\n", command);
+    }
+  }
 }

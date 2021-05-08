@@ -6,7 +6,6 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
-
 #include "hash.h"
 
 typedef struct Node Node;
@@ -19,13 +18,13 @@ typedef struct ListNode ListNode;
 typedef struct ListNode* PtrListNode;
 
 typedef struct HashTable HashTable;
-typedef struct HashTable* PtrTable;
+typedef struct HashTable *PtrTable;
 
 struct ListNode
 {
-    char* name;
-    ListNode* next;
-    char* alias;
+    char *name;
+    ListNode *next;
+    char *alias;
 };
 
 struct Node
@@ -36,7 +35,6 @@ struct Node
     Node* FirstChild;
     Node* Sibling; 
     bool type;
-    //PtrListNode Children;
 };
 struct Tree
 {
@@ -50,23 +48,27 @@ PtrTable MakeTable();
 Node* MakeNode(Node* parentAddress, PtrTree root, char *inputString, bool inputType);
 PtrTree MakeTree();
 
-PtrNode Find(char* Prefix);
+PtrNode Find(char *Prefix);
 
-void AddFile(PtrNode current, PtrTree root, char* inputName);
-void AddDirectory(PtrNode current, PtrTree root, char* inputName);
+void AddFile(PtrNode current, PtrTree Tree, char *inputName);
+void AddDirectory(PtrNode current, PtrTree Tree, char *inputName);
 
 PtrNode search(PtrNode current, char *array);
-PtrNode Move(PtrTree root, PtrNode inputString);
+PtrNode Move(PtrTree Tree, char *inputString);
 
-int getHash(char* inputString);
-int LookinTable(char* inputString, PtrTable Table);
-HT2** MakeHashTable();
+int getHash(char *inputString);
+int LookinTable(char *inputString, PtrTable Table);
+HT2 **MakeHashTable();
 
-PtrNode Teleport(PtrTree Tree , char* alias, HT2** AliasHashTable);
-PtrNode TeleportSafety(char* alias, PtrTree root);
+PtrNode Teleport(PtrTree Tree, char *alias, HT2 **AliasHashTable);
+PtrNode TeleportSafety(char *alias, PtrTree root);
 
-void StoreAlias(PtrTree Tree, char* Address, char* Alias, HT2** AliasHashTable);
-void StoreAliasSafety(PtrTree root, char* Address, char* Alias);
+void StoreAlias(PtrTree Tree, char *Address, char *Alias, HT2 **AliasHashTable);
+void StoreAliasSafety(PtrTree Tree, char *Address, char *Alias);
+
+void find(char STRING[], int n, char Array[][1000]);
+
+void traverseTree(PtrNode root, char *prefix);
 
 void Quit();
 
