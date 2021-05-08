@@ -7,23 +7,17 @@
 
 typedef struct node
 {
+    char Address[10000];
     int n;
     struct node *next;
-
-} HT;
-typedef struct Node2
-{
-    char Address[330];
-    int n;
-    struct Node2 *next;
     char *Alias;
 
-} HT2;
+} HT;
 
-HT2 **MakeHashTable();
+HT **MakeHashTable();
 
 int hornersRuleHash(int n, char *word);
-void insertSep2(char Address[], HT2 **hashtable, char *Alias);
-char* searchSepAlias(char x[], HT2 **hashtable);
+void insertSep(char Address[], HT **hashtable, char *Alias);
+char *searchSepAlias(char x[], HT **hashtable);
 
 #endif

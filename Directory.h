@@ -15,11 +15,12 @@ void AddFile(PtrNode current, PtrTree Tree, char *inputName);
 void AddDirectory(PtrNode current, PtrTree Tree, char *inputName);
 
 PtrNode search(PtrNode current, char *array);
+PtrNode search2(PtrNode current, char *array);
 PtrNode Move(PtrTree Tree, char *inputString);
 
-PtrNode Teleport(PtrTree Tree, char *alias, HT2 **AliasHashTable);
+PtrNode Teleport(PtrTree Tree, char *alias, HT **AliasHashTable);
 
-void StoreAlias(PtrTree Tree, char *Address, char *Alias, HT2 **AliasHashTable);
+void StoreAlias(PtrTree Tree, char *Address, char *Alias, HT **AliasHashTable);
 
 void find(char STRING[], int n, char Array[][1000]);
 void traverseTree(PtrNode root, char *prefix);

@@ -2,14 +2,35 @@
 #include "hash.h"
 #include "Tree.h"
 
-void AddFile(PtrNode current, PtrTree root, char *inputString)
+void AddFile(PtrNode current, PtrTree tree, char *inputString)
 {
-    Node *File = MakeNode(current, root, inputString, 1); // inputType of file is 1
+    PtrNode N;
+
+    N = search2(current, inputString);
+
+    if(N == NULL)
+    {
+        Node *File = MakeNode(current, tree, inputString, 1); // inputType of file is 1
+        //printf(GREEN);
+        printf("A file named '%s' has been added to the current directory '%s'\n", inputString, current->name);
+        //printf(RESET);
+    }
+
 }
 
-void AddDirectory(PtrNode current, PtrTree root, char *inputString)
+void AddDirectory(PtrNode current, PtrTree tree, char *inputString)
 {
-    Node *Folder = MakeNode(current, root, inputString, 0); // inputType of directory is 0
+    PtrNode N;
+
+    N = search2(current, inputString);
+
+    if(N == NULL)
+    {
+        Node *Folder = MakeNode(current, tree, inputString, 0); // inputType of directory is 0
+        //printf(GREEN);
+        printf("A directory named '%s' has been added to the current directory '%s'\n", inputString, current->name);
+        //printf(RESET);
+    }
 }
 
 PtrNode search(PtrNode current, char *array)
@@ -40,9 +61,41 @@ PtrNode search(PtrNode current, char *array)
     return NULL;
 }
 
+PtrNode search2(PtrNode current, char *array)
+{
+    if (current->FirstChild == NULL)
+    {
+        return NULL;
+    }
+
+    PtrNode head = current->FirstChild;
+
+    while (head != NULL)
+    {
+        if (strcmp(head->name, array) == 0)
+        {
+            if (head->type == 1)
+            {
+                printf("A file with name '%s' already exists in current directory\n", head->name);
+                return head;
+            }
+
+            else
+            {
+                printf("A directory with name '%s' already exists in current directory\n", head->name);
+                return head;
+            }
+        }
+
+        head = head->Sibling;
+    }
+
+    return NULL;
+}
+
 PtrNode Move(PtrTree Tree, char *inputString)
 {
-    char array[100];
+    char array[1000];
 
     PtrNode parent = Tree->root;
     PtrNode current = Tree->root;
@@ -92,19 +145,7 @@ PtrNode Move(PtrTree Tree, char *inputString)
     return current;
 }
 
-HT2 **MakeHashTable()
-{
-    struct Node2 **HT2 = (struct Node2 **)malloc(sizeof(struct Node2 *) * 2003);
-
-    for (int i = 0; i < 2003; i++)
-    {
-        HT2[i] = NULL;
-    }
-
-    return HT2;
-}
-
-void StoreAlias(PtrTree Tree, char *Address, char *Alias, HT2 **AliasHashTable)
+void StoreAlias(PtrTree Tree, char *Address, char *Alias, HT **AliasHashTable)
 {
     if (searchSepAlias(Alias, AliasHashTable) != NULL)
     {
@@ -122,14 +163,14 @@ void StoreAlias(PtrTree Tree, char *Address, char *Alias, HT2 **AliasHashTable)
         printf("The file/directory at location '%s' has been stored with alias '%s'\n", Address, Alias);
     }
     
-    insertSep2(Address, AliasHashTable, Alias);
+    insertSep(Address, AliasHashTable, Alias);
 }
 
 // Teleport :
 // Teleports to an alias entered by the user, updating the current directory to start from the entered alias
 // Calls the search function, to search up the entered alias in the hash table, and moves to the address of the desired alias
 
-PtrNode Teleport(PtrTree Tree, char *alias, HT2 **AliasHashTable)
+PtrNode Teleport(PtrTree Tree, char *alias, HT **AliasHashTable)
 {
     char *NewAddress;
     NewAddress = searchSepAlias(alias, AliasHashTable); //Hash search function implemented in hash.c
@@ -224,22 +265,46 @@ void Quit()
 
 void printManual()
 {
-    printf("\n\n*********************************************************************************************\n\n \
-          \x1b[32mWelcome to Directory Manager!\n\n \
-          Choose one of the following options to continue:\n\n \ 
-          STYLE_BOLD 1. ADD STYLE_NO_BOLD\n \
-          Adds a file or directory\n\n \
-          2. MOVE\n \
-          Changes the current directory to another directory\n\n \
-          3. ALIAS\n \
-          Saves a directory with an alias\n\n \
-          4. TELEPORT\n \
-          Changes the current directory to another directory by taking in an alias\n\n \
-          5. FIND\n \
-          Finds directories and files with a given prefix inside the current directory\n\n \
-          6. QUIT\n \
-          Exit the program\n\n");
-  printf("\x1b[0m");
+    printf("\n\n*********************************************************************************************\n\n");
+    
+    printf(BOLD);
+    //printf(MAGENTA);
+    printf("Welcome to Directory Manager!\n\n");
+    printf(NO_BOLD);
+    //printf(RESET);
+
+    printf("Choose one of the following options to continue:\n\n");
+
+    printf(BOLD);
+    printf("1. ADD\n");
+    printf(NO_BOLD);
+    printf("Adds a file or directory\n\n");
+
+    printf(BOLD);
+    printf("2. MOVE\n");
+    printf(NO_BOLD);
+    printf("Changes the current directory to another directory\n\n");
+
+    printf(BOLD);
+    printf("3. ALIAS\n");
+    printf(NO_BOLD);
+    printf("Saves a directory with an alias\n\n");
+
+    printf(BOLD);
+    printf("4. TELEPORT\n");
+    printf(NO_BOLD);
+    printf("Changes the current directory to another directory by taking in an alias\n\n");
+
+    printf(BOLD);
+    printf("5. FIND\n");
+    printf(NO_BOLD);
+    printf("Finds directories and files with a given prefix inside the current directory\n\n");
+
+    printf(BOLD);
+    printf("6. QUIT\n");
+    printf(NO_BOLD);
+    printf("Exit the program\n\n");
+
   printf("**********************************************************************************************\n\n");
   
 }
