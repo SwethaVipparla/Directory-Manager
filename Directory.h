@@ -24,6 +24,7 @@ void StoreAlias(PtrTree Tree, char *Address, char *Alias, HT **AliasHashTable);
 
 void find(char STRING[], int n, char Array[][1000]);
 void traverseTree(PtrNode root, char *prefix);
+void ls(PtrNode root);
 
 void Quit();
 

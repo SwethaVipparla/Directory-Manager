@@ -122,6 +122,11 @@ int main(void)
       find(prefix, strlen(prefix), Elements);
     }
 
+    else if (strcmp("LS", command) == 0 || strcmp("Ls", command) == 0 || strcmp("ls", command) == 0)
+    {
+      ls(current);
+    }
+
     else if (strcmp("QUIT", command) == 0 || strcmp("Quit", command) == 0 || strcmp("quit", command) == 0)
     {
       Quit();

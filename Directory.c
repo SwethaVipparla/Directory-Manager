@@ -35,23 +35,25 @@ void AddDirectory(PtrNode current, PtrTree tree, char *inputString)
     }
 }
 
-//Implements one level searching of directories with a given name in the current directory i.e. it will search only the children of 
-//current directory . If not found or a file found , prints message and returns
+/*
+ Implements one level searching of directories with a given name in the current directory i.e. it will search only the children of 
+ current directory . If not found or a file found , prints message and returns.
+*/
 PtrNode search(PtrNode current, char *array)
 {
-    if (current->type == 1)//If a file is passed we need not search
+    if (current->type == 1) // If a file is passed we need not search
     {
         return NULL;
     }
 
-    PtrNode head = current->FirstChild;//Pointer to first member of linked list of children . Might be NULL
+    PtrNode head = current->FirstChild; // Pointer to first member of linked list of children . Might be NULL
 
-    //Traversing through the linked list to search for desired directory                                    
+    // Traversing through the linked list to search for desired directory                                    
     while (head != NULL)
     {
         if (strcmp(head->name, array) == 0)//Names matched
         {
-            if (head->type == 1)//If there exists a file with the given name 
+            if (head->type == 1) // If there exists a file with the given name 
             {
                 //Print error message and return NULL
                 printf(RED);
@@ -61,11 +63,12 @@ PtrNode search(PtrNode current, char *array)
                 return NULL;
             }
             else
-                return head;// Directory found and returned
+                return head; // Directory found and returned
         }
         head = head->Sibling;
     }
-    //There is no member of linkedlist which has the name as as char string given as input.Print message and return
+
+    // There is no member of linkedlist which has the name as as char string given as input.Print message and return
     printf(RED);
     printf("Error: There exists no directory named '%s' in parent directory! '%s'\n", array, current->name);
     printf(RESET);
@@ -111,14 +114,14 @@ PtrNode search2(PtrNode current, char *array)
     return NULL;
 }
 
-//Changes current directory to any directoryby taking input the complete path to that directory.Handles errors for incorrect paths
+// Changes current directory to any directoryby taking input the complete path to that directory. Handles errors for incorrect paths.
 PtrNode Move(PtrTree Tree, char *inputString)
 {
     char array[10000];
 
-    PtrNode current = Tree->root;//Pointer to root directory
+    PtrNode current = Tree->root;// Pointer to root directory
 
-    if (strcmp(inputString, "root") == 0)//If address of root is given we return pointer to root 
+    if (strcmp(inputString, "root") == 0) // If address of root is given we return pointer to root 
     {
         return current;
     }
@@ -127,41 +130,45 @@ PtrNode Move(PtrTree Tree, char *inputString)
     {
         if (inputString[i] == '/')
         {
-            array[j] = '\0';//completes the string 
-            //address is like root/x/y.... till i=4 only root/ is present . This is skipped since pointer to root is already there
+            array[j] = '\0'; // completes the string 
+
+            // address is like root/x/y.... till i=4 only root/ is present . This is skipped since pointer to root is already there
             if (i == 4)
             {
                 goto L1;
             }
 
-            current = search(current, array);//returns pointer to one of the children(if it exists) of current with name as that of array string
+            current = search(current, array); // returns pointer to one of the children(if it exists) of current with name as that of array string
 
-            if (current == NULL)//Message has been printed in search
+            // Message has been printed in search
+            if (current == NULL)
             {
                 return NULL;
             }
 
         L1:
-            j = -1;//next iteration j=0 , So array will be re-written from starting index
+            j = -1; // next iteration j=0 , So array will be re-written from starting index
             continue;
         }
 
-        array[j] = inputString[i];//copy characters
+        array[j] = inputString[i]; // copy characters
 
-        if (i == strlen(inputString) - 1)//last character of string has been copied
+        // last character of string has been copied
+        if (i == strlen(inputString) - 1)
         {
-            array[++j] = '\0';//complete the string
+            array[++j] = '\0'; // complete the string
 
-            current = search(current, array);//returns pointer to one of the children(if it exists) of current with name as that of array string
+            current = search(current, array); // returns pointer to one of the children(if it exists) of current with name as that of array string
 
-            if (current == NULL)//Message has been printed in search
+            // Message has been printed in search
+            if (current == NULL) 
             {
                 return NULL;
             }
         }
     }
 
-    return current;//Got the desired directory and returned pointer to it
+    return current; // Got the desired directory and returned pointer to it
 }
 
 void StoreAlias(PtrTree Tree, char *Address, char *Alias, HT **AliasHashTable)
@@ -190,16 +197,19 @@ void StoreAlias(PtrTree Tree, char *Address, char *Alias, HT **AliasHashTable)
     insertSep(Address, AliasHashTable, Alias);
 }
 
-// Teleport :
-// Teleports to an alias entered by the user, updating the current directory to start from the entered alias
-// Calls the search function, to search up the entered alias in the hash table, and moves to the address of the desired alias
+/*
+ Teleport :
+ Teleports to an alias entered by the user, updating the current directory to start from the entered alias
+ Calls the search function, to search up the entered alias in the hash table, and moves to the address of the desired alias
+*/
 
 PtrNode Teleport(PtrTree Tree, char *alias, HT **AliasHashTable)
 {
     char *NewAddress;
-    NewAddress = searchSepAlias(alias, AliasHashTable); //Hash search function implemented in hash.c
+    NewAddress = searchSepAlias(alias, AliasHashTable); // Hash search function implemented in hash.c
     
-    if (NewAddress == NULL)                             //Error handling : for when the entered alias is not found in the hash table
+    // Error handling : for when the entered alias is not found in the hash table
+    if (NewAddress == NULL)                             
     {
         printf(RED);
         printf("\nThe alias '%s' does not exist!\n", alias);
@@ -207,8 +217,9 @@ PtrNode Teleport(PtrTree Tree, char *alias, HT **AliasHashTable)
 
         return NULL;
     }
-    
-    else //When the entered alias exists, the current directory is updated to the address of the entered alias by the Move function
+
+    // When the entered alias exists, the current directory is updated to the address of the entered alias by the Move function
+    else 
     {
         PtrNode directory = Move(Tree, NewAddress);
         return directory;
@@ -284,6 +295,28 @@ void find(char STRING[], int n, char Array[][1000])
     //optimiztion can be done with the while loop as for how many times to run it
 }
 
+/*
+ ls:
+ Lists the files and directories in the current directory
+*/
+void ls(PtrNode root)
+{
+    // error handling
+    if(root == NULL) // directory is empty
+        return;
+    
+    root = root->FirstChild;
+
+    // loops until the end of the linked list
+    while(root != NULL) 
+    {
+        printf("%s   ",root->name);
+        root = root->Sibling; // linked list traversal
+    }
+
+    printf("\n");
+}
+
 void Quit()
 {
     printf("\nGoodbye\n");
@@ -328,7 +361,12 @@ void printManual()
     printf("Finds directories and files with a given prefix inside the current directory\n\n");
 
     printf(BOLD);
-    printf("6. QUIT\n");
+    printf("6. LS\n");
+    printf(NO_BOLD);
+    printf("Lists the contents of the current directory\n\n");
+    
+    printf(BOLD);
+    printf("7. QUIT\n");
     printf(NO_BOLD);
     printf("Exit the program\n\n");
 
