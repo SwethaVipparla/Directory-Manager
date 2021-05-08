@@ -59,7 +59,11 @@ int main(void)
       if (N)
       {
         printf(GREEN);
+<<<<<<< HEAD
+        printf("The current directory has been changed from '%s' to '%s'\n", current->name, N->name);
+=======
         printf("\nThe current directory has been changed from '%s' to '%s'\n", current->name, N->name);
+>>>>>>> 24b478ce873d912ff78b4c028bc6a89e63c0d3a2
         printf(RESET);
 
         current = N;

@@ -8,7 +8,11 @@
 #define NO_BOLD "\033[22m"
 #define RED "\033[31m"
 #define GREEN "\033[32m"
+<<<<<<< HEAD
+#define MAGENTA "\033[35m"
+=======
 #define CYAN "\033[36m"
+>>>>>>> 24b478ce873d912ff78b4c028bc6a89e63c0d3a2
 #define RESET "\033[0m"
 
 void AddFile(PtrNode current, PtrTree Tree, char *inputName);
