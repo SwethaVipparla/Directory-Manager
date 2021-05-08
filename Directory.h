@@ -1,5 +1,7 @@
 #ifndef __DIRECTORY__H
 #define __DIRECTORY__H
+
+#include "hash.h"
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -7,68 +9,66 @@
 #include <string.h>
 
 typedef struct Node Node;
-typedef struct Node* PtrNode;
+typedef struct Node *PtrNode;
+
 typedef struct Tree Tree;
-typedef struct Tree* PtrTree;
+typedef struct Tree *PtrTree;
+
 typedef struct ListNode ListNode;
-typedef struct ListNode* PtrListNode;
+typedef struct ListNode *PtrListNode;
+
 typedef struct HashTable HashTable;
-typedef struct HashTable* PtrTable;
+typedef struct HashTable *PtrTable;
 
 struct ListNode
 {
-    char* name;
-    ListNode* next;
-    char* alias;
+    char *name;
+    ListNode *next;
+    char *alias;
 };
 
 struct Node
 {
-    Node* Parent;
-    char* name;
-    Node* FirstChild;
-    Node* Sibling; 
+    Node *Parent;
+    char *name;
+    char *Alias;
+    Node *FirstChild;
+    Node *Sibling;
     bool type;
-    //PtrListNode Children;
 };
-
-// struct TreeNode
-// {
-//     TreeNode* Parent;
-//     char *name;
-//     PtrListNode Children;
-//     bool type;
-// };
-
-
 struct Tree
 {
-    Node* root;
-};
-
-struct HashTable
-{
+    Node *root;
 };
 
 PtrListNode MakeList();
 PtrListNode MakeList();
 PtrTable MakeTable();
-Node* MakeNode(Node* parentAddress ,PtrTree Tree, char *inputString , bool inputType);
+
+Node *MakeNode(Node *parentAddress, PtrTree Tree, char *inputString, bool inputType);
 PtrTree MakeTree();
 
-PtrNode Find(char* Prefix);
+PtrNode Find(char *Prefix);
+
+void AddFile(PtrNode current, PtrTree Tree, char *inputName);
+void AddDirectory(PtrNode current, PtrTree Tree, char *inputName);
+
 PtrNode search(PtrNode current, char *array);
+PtrNode Move(PtrTree Tree, char *inputString);
 
-void AddFile(PtrNode current, PtrTree Tree, char *inputString);
-void AddDirectory(PtrNode current, PtrTree Tree, char* inputString);
+int getHash(char *inputString);
+int LookinTable(char *inputString, PtrTable Table);
+HT2 **MakeHashTable();
 
-PtrNode Move(PtrTree Tree,char* inputString);
+PtrNode Teleport(PtrTree Tree, char *alias, HT2 **AliasHashTable);
+PtrNode TeleportSafety(char *alias, PtrTree root);
 
-int getHash(char* inputString);
-int LookinTable(char* inputString, PtrTable Table);
+void StoreAlias(PtrTree Tree, char *Address, char *Alias, HT2 **AliasHashTable);
+void StoreAliasSafety(PtrTree Tree, char *Address, char *Alias);
 
-PtrNode Teleport(char* alias);
-void StoreAlias(char* Address, char* Alias);
+void find(char STRING[], int n, char Array[][1000]);
+
+void traverseTree(PtrNode root, char *prefix);
 
 void Quit();
 
