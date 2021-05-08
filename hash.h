@@ -30,4 +30,3 @@ int searchSep(int x, int tablesize, HT *hashtable[]);
 int searchSep2(char x[], HT2 *hashtable[]);
 
 #endif
-
