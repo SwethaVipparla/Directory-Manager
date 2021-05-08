@@ -106,7 +106,7 @@ char* searchSepAlias(char x[], HT2 **hashtable)
 
 void insertSep2(char Address[], HT2 **hashtable, char *Alias)
 {
-    int pos = hash2(Alias);
+    int pos = hornersRuleHash(2003, Alias);
 
     if (hashtable[pos] == NULL)
     {
