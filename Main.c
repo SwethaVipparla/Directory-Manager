@@ -14,6 +14,7 @@ int main(void)
   HT **HTable = MakeHashTable();
 
   PtrTree Tree = makeTree();
+  PtrTree treeRoot = Tree; 
   PtrNode current = Tree->root;
 
   printManual();
@@ -79,7 +80,7 @@ int main(void)
 
       if (N)
       {
-        if(strcmp(current->name, N->name)==0)
+        if(strcmp(current->name, N->name) == 0)
         {
           printf(RED);
           printf("\n Error: You're already in the %s directory!\n", current->name);
@@ -104,10 +105,10 @@ int main(void)
 
       printf("\n In current directory:\n\n");
 
-      traverseTree(current->FirstChild, prefix);
+      directoryFind(current->FirstChild, prefix);
 
       printf("\n\n In complete manager:\n\n");
-      find(prefix, strlen(prefix), Elements);
+      managerFind(prefix, strlen(prefix), Elements);
     }
 
     else if (strcmp("LS", command) == 0 || strcmp("Ls", command) == 0 || strcmp("ls", command) == 0)

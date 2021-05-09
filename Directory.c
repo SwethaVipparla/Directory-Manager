@@ -2,15 +2,20 @@
 #include "hash.h"
 #include "Tree.h"
 
+/*
+ addFile:
+ Takes in pointers to the current node, tree, and the input string, and creates a file with the corresponding
+ name. This file is stored in the current directory.
+*/
 void addFile(PtrNode current, PtrTree tree, char *inputString)
 {
     PtrNode N;
 
-    N = search2(current, inputString);
+    N = search2(current, inputString); // Searches if a file with the given name already exists in the current directory and gives an error message accordingly
 
     if(N == NULL)
     {
-        Node *File = makeNode(current, tree, inputString, 1); // inputType of file is 1
+        Node *File = makeNode(current, tree, inputString, 1); // Makes a node for the file, and inputType of file is 1
         
         printf(GREEN);
         printf("\n New file '%s' added to the current directory '%s'!\n", inputString, current->name);
@@ -19,15 +24,20 @@ void addFile(PtrNode current, PtrTree tree, char *inputString)
 
 }
 
+/*
+ addDirectory:
+ Takes in pointers to the current node, tree, and the input string, and creates a directory with the corresponding
+ name. This directory is stored in the current directory.
+*/
 void addDirectory(PtrNode current, PtrTree tree, char *inputString)
 {
     PtrNode N;
 
-    N = search2(current, inputString);
+    N = search2(current, inputString); // Searches if a directory with the given name already exists in the current directory and gives an error message accordingly
 
     if(N == NULL)
     {
-        Node *Folder = makeNode(current, tree, inputString, 0); // inputType of directory is 0
+        Node *Folder = makeNode(current, tree, inputString, 0); // Makes a node for the directory, and inputType of file is 1
         
         printf(GREEN);
         printf("\n New directory '%s' added to the current directory '%s'!\n", inputString, current->name);
@@ -36,6 +46,7 @@ void addDirectory(PtrNode current, PtrTree tree, char *inputString)
 }
 
 /*
+ search:
  Implements one level searching of directories with a given name in the current directory i.e. it will search only the children of 
  current directory . If not found or a file found , prints message and returns.
 */
@@ -76,19 +87,29 @@ PtrNode search(PtrNode current, char *array)
     return NULL;
 }
 
+/*
+ search2:
+ Searches if a file/directory with the given name from addFile/addDirectory already exists in the current directory 
+ and gives an error message accordingly.
+*/
 PtrNode search2(PtrNode current, char *array)
 {
+    // If the current directory is empty, this means a directory/file with the given name doesn't exist, and hence, we're good to go
     if (current->FirstChild == NULL)
     {
         return NULL;
     }
 
+    // Make a pointer to the first child of current
     PtrNode head = current->FirstChild;
 
+    // While head is not empty, check whether a file/directory with the given name already exists
     while (head != NULL)
     {
+        // Proceed if the given name and the name of the pointer are the same
         if (strcmp(head->name, array) == 0)
         {
+            // If the type of the pointer is file(1), then that means a file with the same name as given name exists, so print error
             if (head->type == 1)
             {
                 printf(RED);
@@ -98,6 +119,7 @@ PtrNode search2(PtrNode current, char *array)
                 return head;
             }
 
+            // If the type of the pointer is directory(0), then that means a directory with the same name as given name exists, so print error
             else
             {
                 printf(RED);
@@ -108,6 +130,7 @@ PtrNode search2(PtrNode current, char *array)
             }
         }
 
+        // Point the head to its sibling if the given name and the name of the pointer are not the same
         head = head->Sibling;
     }
 
@@ -202,7 +225,6 @@ void storeAlias(PtrTree Tree, char *Address, char *Alias, HT **AliasHashTable)
  Teleports to an alias entered by the user, updating the current directory to start from the entered alias
  Calls the search function, to search up the entered alias in the hash table, and moves to the address of the desired alias
 */
-
 PtrNode teleport(PtrTree Tree, char *alias, HT **AliasHashTable)
 {
     char *NewAddress;
@@ -212,7 +234,7 @@ PtrNode teleport(PtrTree Tree, char *alias, HT **AliasHashTable)
     if (NewAddress == NULL)                             
     {
         printf(RED);
-        printf("\n The alias '%s' does not exist!\n", alias);
+        printf("\n Error: The alias '%s' does not exist!\n", alias);
         printf(RESET);
 
         return NULL;
@@ -227,13 +249,13 @@ PtrNode teleport(PtrTree Tree, char *alias, HT **AliasHashTable)
 }
 
 /*
- traverseTree
+ directoryFind
  Traverse tree is the FIND function which searches strings of directories inside the current directory,
  and returns the strings that match the prefix.
  The function aims to return the prefix mathced strings in BFS manner and prints all those present in the current Directory.
 */
 // This function provides us all the directory names matching the prefix in the current directory
-void traverseTree(PtrNode root, char *prefix)
+void directoryFind(PtrNode root, char *prefix)
 {
     if (root == NULL) // error handling
         return;
@@ -259,33 +281,33 @@ void traverseTree(PtrNode root, char *prefix)
 
         if (m == strlen(prefix) + 1)
         {
-            if(root->type == 0)
-            {
-                printf(LIGHT_PURPLE);
-            }
-            else 
-            {
-                printf(YELLOW);
-            }
+            // if(root->type == 0)
+            // {
+            //     printf(LIGHT_PURPLE);
+            // }
+            // else 
+            // {
+            //     printf(YELLOW);
+            // }
             printf("%s\n",root->name); // The array string which satisfies.
             printf(RESET);
         }
 
         if (root->FirstChild) // checks if exists.
-            traverseTree(root->FirstChild , prefix); // First Child here refers to the first neighbour of current pointer.
+            directoryFind(root->FirstChild , prefix); // First Child here refers to the first neighbour of current pointer.
 
         root = root->Sibling; // here we do the breadth first search.
     }
 }
 
 /*
- find:
- The Universal find searches for all the directory and files in the ROOT directory and returns us the ones matching the prefix.
+ managerFind:
+ The Universal managerFind searches for all the directory and files in the ROOT directory and returns us the ones matching the prefix.
  The Method is to use a global 2d array to store the name of directories whenever a file or directory is added, and Traversing through it,
  which prints the whole list of prefix strings in O(k*N) time, where k is the length of String and N is the number of Directories.
 */
 // This function provides us all the directory names matching the prefix in the whole complete manager directory
-void find(char STRING[], int n, char Array[][1000]) 
+void managerFind(char STRING[], int n, char Array[][1000]) 
 {
 
     int len = n;
@@ -349,18 +371,28 @@ void ls(PtrNode root)
         }
         printf("%s   ", root->name);
         printf(RESET);
+
         root = root->Sibling; // linked list traversal
     }
 
     printf("\n");
 }
 
+/*
+ quit:
+ Quits the program and prints a goodbye message
+*/
 void quit()
 {
     printf("\n Goodbye!\n\n");
     exit(0);
 }
 
+/*
+ printManual:
+ Function to print the Menu that appears at the beginning of the program. 
+ It contains the description of each function and the command to run it.
+*/
 void printManual()
 {
     printf("\n\n    ************************************************************************************************************************\n\n");

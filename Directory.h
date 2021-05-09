@@ -26,8 +26,8 @@ PtrNode teleport(PtrTree Tree, char *alias, HT **AliasHashTable);
 
 void storeAlias(PtrTree Tree, char *Address, char *Alias, HT **AliasHashTable);
 
-void find(char STRING[], int n, char Array[][1000]);
-void traverseTree(PtrNode root, char *prefix);
+void managerFind(char STRING[], int n, char Array[][1000]);
+void directoryFind(PtrNode root, char *prefix);
 void ls(PtrNode root);
 
 void quit();
