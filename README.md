@@ -1,141 +1,141 @@
 # Directory-Manager
 
-## Instructions 
+Directory-Manager is a program that imitates the traditional bash shell, which allows you to manage your files and folders with the basic commands.
 
-### 1. Clone the repo onto your local machine using the following commands:
+&nbsp;
+
+## I. Project Structure
+
+<br>
+
+* [Tree.h](https://github.com/SwethaVipparla/Directory-Manager/blob/master/Tree.h)
+<br>
+`Tree.h` includes all the header files necessary, structures created,
+ and the declarations for the functions used in `Tree.c`.
+
+* [Tree.c](https://github.com/SwethaVipparla/Directory-Manager/blob/master/Tree.c) <br>
+`Tree.c` includes all the function implementations required to 
+ create the left child right sibling tree data structure and nodes.
+
+* [hash.h](https://github.com/SwethaVipparla/Directory-Manager/blob/master/hash.h)
+<br>
+`hash.h` includes all the header files necessary, structures created,
+ and the declarations for the functions used in `hash.c`.
+
+* [hash.c](https://github.com/SwethaVipparla/Directory-Manager/blob/master/hash.c) <br>
+`Hash.c` includes all the function implementations required to 
+ create and implement the hash table that is used in storing the 
+ aliases of the directories.
+
+* [Directory.h](https://github.com/SwethaVipparla/Directory-Manager/blob/master/Directory.h)
+<br>
+`Directory.h` includes all the header files necessary, structures created,
+ and the declarations for the functions used in `Directory.c`.
+
+* [Directory.c](https://github.com/SwethaVipparla/Directory-Manager/blob/master/Directory.c)
+<br>
+`Directory.c` includes all the function implementations required to 
+ implement the `add`, `move`, `alias`, `teleport`, `find`, `ls`, and `quit` functionalities.
+
+* [Main.c](https://github.com/SwethaVipparla/Directory-Manager/blob/master/Main.c)
+<br>
+`Main.c` includes the function calls for the various features and menu
+ interface. The entire codebase is included in this file.
+
+&nbsp;
+## II. Instructions To Run The Program
+
+<br>
+
+### 1. Clone the repo onto your local machine
 ```
->> git clone https://github.com/SwethaVipparla/Directory-Manager.git
+git clone https://github.com/SwethaVipparla/Directory-Manager.git
 ```
 ### 2. Navigate to the Directory-Manager folder
 ```
->> cd Directory-Manager/
+cd Directory-Manager/
 ```
 ### 3. Compile the code
 ```
->> gcc Main.c -o Main
+gcc Main.c -o Main
 ```
 ### 4. Run the compiled code
 ```
->> ./Main
+./Main
 ```
 
-### 5. Once the code is up and running, run the following commands as per the task you wish to perform.
+### 5. Once the code is up and running, a menu appears, asking for the input corresponding to the function wished to execute. A command can be chosen from the list of features available.
 
-### 6. When the terminal asks you Enter your choice, Enter the operation you wish to perform.
-
-
-<br><br>
-
-### 7.  To ADD an Element
-```
-Enter your choice
->> ADD
-```
-* #### To Add a File
-```
-Directory(di)/File(fi)
->> fi
-```
-* #### To Add a Directory
-```
-Directory(di)/File(fi)
->> di
-```
-   * #### Name of the Element
-  ``` 
-  Enter the name
-  >> Name_of_the_file/directory
-  ```
-  >  Note:The name entered must be a single word.
-
-  > Note: The file/directory is added to the present working directory.
-
-<br>
+&nbsp;
+## III. Features
 <br>
 
-### 8. To move to an Address
+### 1.  Add
+Adds a file or directory to the current directory\
 ```
-Enter your choice
->> MOVE
+add di/fi <new_name>
 ```
-```
-Enter the Path
->> Enter the address where you wish to move
-```
->  Note: Since the initial directory we're in is "root",<br>
-The path should be of the form **"root/Directory1/Directory2/..."**<br>
-
->The function takes you inside the last directory you entered. If incorrect path is entered, no change in the current position is performed.<br>
-
-> For example: root/Dir1/Dir12/Dir123
-will move you inside the Dir123 directory
+>  Note: The name entered must be a single word.  
 
 <br>
-<br>
 
-### 9.  To store an Address in the form an Alias
+### 2.  Move
+Changes the current directory to another directory\
 ```
-Enter your choice
->> ALIAS
+move <path_to_destination_directory>
 ```
-```
-Enter the path
->> Enter the address of the directory that you wish to store
-```
-> Note: Take care of format of address.
 
-
-> Note: Alias can only be stored for directory addresses as specified in the document.
-```
-Enter the Alias
->> Alias_for_the_corresponding_address
-```
-> Note: Alias must be a single word. 
+>  Note:\
+Since the initial directory we're in is "root", the path should be of the form **"root/Directory1/Directory2/..."**<br>
+The function takes you inside the last directory you entered. If incorrect path is entered, no change in the current position is performed.<br>
+For example: `move root/Dir1/Dir12/Dir123`
+will move you inside the Dir123 directory.
 
 <br>
+
+### 3.  Alias
+Saves a directory with an alias\
+```
+alias <path_to_directory> <new_alias>
+```
+> Note:\
+ Take care of format of address.\
+Alias can only be stored for directory addresses, as specified in the document. Alias must be a single word. 
+
 <br>
 
-### 10.  To Teleport to a particular location
+### 4.  Teleport
+Changes the current directory to another directory by taking in an existing alias\
 ```
-Enter your choice
->> TELEPORT
+teleport <existing_alias>
 ```
-```
-Enter the Alias
->> Alias_for_the_required_location
-```
-<br>
 <br>
 
-### 11.  To Find the Elements
+### 5.  Find
+Finds directories and files with a given prefix inside the current directory
+\
 ```
-Enter your choice
->> FIND
-```
-```
-Enter the prefix
->> Prefix_to_be_found
+find <prefix>
 ```
 > Note: The prefix must be a single word.
 
 <br>
+
+### 6.  Ls
+Lists the contents of the current directory
+\
+```
+ls
+```
 <br>
 
-### 12. To list all Elements in the Current Directory
+### 7.  Quit
+Exit the program
+\
 ```
-Enter your choice
->> ls
+quit
 ```
-<br>
-<br>
+> Note: Make sure to add QUIT at the end of the test file if the input is taken via a text file.
 
-### 13. To terminate the function
-```
-Enter your choice
->> Quit
-```
-<br>
-<br>
-
-> Note: Make sure to put a QUIT at the end of test file if taking input via text file.
+&nbsp;
 
