@@ -1,6 +1,9 @@
+/*
+ Directory.c includes all the function implementations required to 
+ implement the add, move, alias, teleport, find, ls, and quit functionalities.
+*/
+
 #include "Directory.h"
-#include "hash.h"
-#include "Tree.h"
 
 /*
  addFile:
@@ -137,12 +140,16 @@ PtrNode search2(PtrNode current, char *array)
     return NULL;
 }
 
-// Changes current directory to any directoryby taking input the complete path to that directory. Handles errors for incorrect paths.
+/*
+ move:
+ Changes current directory to any directory by taking input the complete path to that directory. 
+ Handles errors for incorrect paths.
+*/
 PtrNode move(PtrTree Tree, char *inputString)
 {
     char array[10000];
 
-    PtrNode current = Tree->root;// Pointer to root directory
+    PtrNode current = Tree->root; // Pointer to root directory
 
     if (strcmp(inputString, "root") == 0) // If address of root is given we return pointer to root 
     {
@@ -155,13 +162,13 @@ PtrNode move(PtrTree Tree, char *inputString)
         {
             array[j] = '\0'; // completes the string 
 
-            // address is like root/x/y.... till i=4 only root/ is present . This is skipped since pointer to root is already there
+            // Address is like root/x/y.... till i=4 only root/ is present. This is skipped since pointer to root is already there
             if (i == 4)
             {
                 goto L1;
             }
 
-            current = search(current, array); // returns pointer to one of the children(if it exists) of current with name as that of array string
+            current = search(current, array); // Returns pointer to one of the children(if it exists) of current with name as that of array string
 
             // Message has been printed in search
             if (current == NULL)
@@ -170,18 +177,18 @@ PtrNode move(PtrTree Tree, char *inputString)
             }
 
         L1:
-            j = -1; // next iteration j=0 , So array will be re-written from starting index
+            j = -1; // Next iteration j = 0 , So array will be re-written from starting index
             continue;
         }
 
         array[j] = inputString[i]; // copy characters
 
-        // last character of string has been copied
+        // Last character of string has been copied
         if (i == strlen(inputString) - 1)
         {
-            array[++j] = '\0'; // complete the string
+            array[++j] = '\0'; // Complete the string
 
-            current = search(current, array); // returns pointer to one of the children(if it exists) of current with name as that of array string
+            current = search(current, array); // Returns pointer to one of the children(if it exists) of current with name as that of array string
 
             // Message has been printed in search
             if (current == NULL) 
@@ -195,14 +202,15 @@ PtrNode move(PtrTree Tree, char *inputString)
 }
 
 /*
-The StoreAlias function adds the given address and the alias
-to a globally declared hashtable
+ storeAlias:
+ The storeAlias function adds the given address and the alias
+ to a globally declared hashtable
 */
 void storeAlias(PtrTree Tree, char *Address, char *Alias, HT **AliasHashTable)
 {
     if (searchSepAlias(Alias, AliasHashTable) != NULL)
     {
-        //searchSepAlias here checks if the alias already exists.
+        // SearchSepAlias here checks if the alias already exists
         printf(RED);
         printf("\n Error: The alias '%s' already exists!\n", Alias);
         printf(RESET);
@@ -211,7 +219,7 @@ void storeAlias(PtrTree Tree, char *Address, char *Alias, HT **AliasHashTable)
     }
 
     PtrNode N = move(Tree, Address);
-     //Move function here verifies if the address is valid or not
+     // Move function here verifies if the address is valid or not
     
     if (N == NULL)
         return;
@@ -222,10 +230,9 @@ void storeAlias(PtrTree Tree, char *Address, char *Alias, HT **AliasHashTable)
         printf("\n The directory at location '%s' has been stored with alias '%s'!\n", Address, Alias);
         printf(RESET);
     }
-    
 
-    //Inserts the address and alias into the hashtable
-    //Uses seperate chaining
+    // Inserts the address and alias into the hashtable
+    // Uses seperate chaining
     insertSep(Address, AliasHashTable, Alias);
 }
 
@@ -329,20 +336,20 @@ void managerFind(char STRING[], int n, char Array[][1000])
 
         for (int i = 0; i < len; i++)
         {
-            // matching every single character of both prefix to respective string in Array
+            // Matching every single character of both prefix to respective string in Array
             if (Array[j][i] == STRING[i]) 
             {
                 m++;
             }
 
-            // breaks out of the loop otherwise
+            // Breaks out of the loop otherwise
             else
             {
                 break;
             }
         }
 
-        // when the value of m has been summed up n times, then only it had been same
+        // When the value of m has been summed up n times, then only it had been same
         if (m == len + 1)
         {
             printf("%s\n", Array[j]); // The array string which satisfies
@@ -359,15 +366,15 @@ void managerFind(char STRING[], int n, char Array[][1000])
 */
 void ls(PtrNode root)
 {
-    // error handling
-    if(root == NULL) // directory is empty
+    // Error handling
+    if(root == NULL) // Directory is empty
         return;
     
     root = root->FirstChild;
 
     printf("\n");
 
-    // loops until the end of the linked list
+    // Loops until the end of the linked list
     while(root != NULL) 
     {
         if(root->type == 0)
@@ -381,7 +388,7 @@ void ls(PtrNode root)
         printf("%s   ", root->name);
         printf(RESET);
 
-        root = root->Sibling; // linked list traversal
+        root = root->Sibling; // Linked list traversal
     }
 
     printf("\n");
@@ -417,7 +424,7 @@ void printManual()
     printf(BOLD);
     printf("                    1. ADD\n");
     printf(NO_BOLD);
-    printf("                       Adds a file or directory\n");
+    printf("                       Adds a file or directory to the current directory\n");
     printf("                       Command: ");
     printf(LIGHT_PINK);
     printf("add di/fi <new_name>\n\n");
@@ -478,5 +485,4 @@ void printManual()
     printf(RESET);
 
   printf("    *************************************************************************************************************************\n\n");
-  
 }

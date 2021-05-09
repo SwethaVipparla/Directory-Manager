@@ -1,3 +1,8 @@
+/*
+ Tree.c includes all the function implementations required to 
+ create the left child right sibling tree data structure and nodes
+*/
+
 #include "Tree.h"
 
 /*
