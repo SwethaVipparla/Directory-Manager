@@ -194,10 +194,15 @@ PtrNode move(PtrTree Tree, char *inputString)
     return current; // Got the desired directory and returned pointer to it
 }
 
+/*
+The StoreAlias function adds the given address and the alias
+to a globally declared hashtable
+*/
 void storeAlias(PtrTree Tree, char *Address, char *Alias, HT **AliasHashTable)
 {
     if (searchSepAlias(Alias, AliasHashTable) != NULL)
     {
+        //searchSepAlias here checks if the alias already exists.
         printf(RED);
         printf("\n Error: The alias '%s' already exists!\n", Alias);
         printf(RESET);
@@ -206,6 +211,7 @@ void storeAlias(PtrTree Tree, char *Address, char *Alias, HT **AliasHashTable)
     }
 
     PtrNode N = move(Tree, Address);
+     //Move function here verifies if the address is valid or not
     
     if (N == NULL)
         return;
@@ -217,6 +223,9 @@ void storeAlias(PtrTree Tree, char *Address, char *Alias, HT **AliasHashTable)
         printf(RESET);
     }
     
+
+    //Inserts the address and alias into the hashtable
+    //Uses seperate chaining
     insertSep(Address, AliasHashTable, Alias);
 }
 
