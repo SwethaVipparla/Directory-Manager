@@ -126,7 +126,7 @@ PtrNode search2(PtrNode current, char *array)
             else
             {
                 printf(RED);
-                printf("\n Error: A directory with name '%s' already exists in current directory!", head->name);
+                printf("\n Error: A directory with name '%s' already exists in current directory!\n", head->name);
                 printf(RESET);
                 
                 return head;
