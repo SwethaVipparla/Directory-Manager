@@ -13,7 +13,7 @@ int main(void)
   char command[20];
   HT **HTable = MakeHashTable();
 
-  PtrTree Tree = MakeTree();
+  PtrTree Tree = makeTree();
   PtrNode current = Tree->root;
 
   printManual();
@@ -34,13 +34,12 @@ int main(void)
 
       if (strcmp("di", type) == 0)
       {
-        AddDirectory(current, Tree, Elements[i]);
-        
+        addDirectory(current, Tree, Elements[i]);
       }
 
       if (strcmp("fi", type) == 0)
       {
-        AddFile(current, Tree, Elements[i]);
+        addFile(current, Tree, Elements[i]);
       }
 
       i++;
@@ -51,12 +50,12 @@ int main(void)
       char path[1000];
       scanf(" %s", path);
 
-      PtrNode N = Move(Tree, path);
+      PtrNode N = move(Tree, path);
 
       if (N)
       {
         printf(GREEN);
-        printf("\nThe current directory has been changed from '%s' to '%s'!\n", current->name, N->name);
+        printf("\n The current directory has been changed from '%s' to '%s'!\n", current->name, N->name);
         printf(RESET);
 
         current = N;
@@ -68,7 +67,7 @@ int main(void)
       char alias[1000], path[1000];
       scanf("%s %s", path, alias);
 
-      StoreAlias(Tree, path, alias, HTable);
+      storeAlias(Tree, path, alias, HTable);
     }
 
     else if (strcmp("TELEPORT", command) == 0 || strcmp("Teleport", command) == 0 || strcmp("teleport", command) == 0)
@@ -76,21 +75,21 @@ int main(void)
       char alias[1000];
       scanf("%s", alias);
 
-      PtrNode N = Teleport(Tree, alias, HTable);
+      PtrNode N = teleport(Tree, alias, HTable);
 
       if (N)
       {
         if(strcmp(current->name, N->name)==0)
         {
           printf(RED);
-          printf("\nError: You're already in the %s directory!\n", current->name);
+          printf("\n Error: You're already in the %s directory!\n", current->name);
           printf(RESET);
         }
 
         else
         {  
           printf(GREEN);
-          printf("\nThe current directory has been changed from '%s' to '%s'!\n", current->name, N->name);
+          printf("\n The current directory has been changed from '%s' to '%s'!\n", current->name, N->name);
           printf(RESET);
         }
 
@@ -103,11 +102,11 @@ int main(void)
       char prefix[1000];
       scanf("%s", prefix);
 
-      printf("\nIn current directory:\n\n");
+      printf("\n In current directory:\n\n");
 
       traverseTree(current->FirstChild, prefix);
 
-      printf("\n\nIn complete manager:\n\n");
+      printf("\n\n In complete manager:\n\n");
       find(prefix, strlen(prefix), Elements);
     }
 
@@ -118,13 +117,13 @@ int main(void)
 
     else if (strcmp("QUIT", command) == 0 || strcmp("Quit", command) == 0 || strcmp("quit", command) == 0)
     {
-      Quit();
+      quit();
     }
 
     else
     {
       printf(RED);
-      printf("\nError: Please enter a valid command to proceed!\n\n");
+      printf("\n Error: Please enter a valid command to proceed!\n");
       printf(RESET);
     }
   }

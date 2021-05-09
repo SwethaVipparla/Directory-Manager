@@ -1,6 +1,6 @@
 #include "Tree.h"
 
-PtrTree MakeTree()
+PtrTree makeTree()
 {
     PtrTree T = (PtrTree)malloc(sizeof(Tree));
     T->root = (Node *)malloc(sizeof(Node));
@@ -15,7 +15,7 @@ PtrTree MakeTree()
     return T;
 }
 
-Node *MakeNode(Node *parentAddress, PtrTree root, char *inputName, bool inputType)
+Node *makeNode(Node *parentAddress, PtrTree root, char *inputName, bool inputType)
 {
     Node *N = (Node *)malloc(sizeof(Node));
 

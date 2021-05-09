@@ -2,7 +2,7 @@
 #include "hash.h"
 #include "Tree.h"
 
-void AddFile(PtrNode current, PtrTree tree, char *inputString)
+void addFile(PtrNode current, PtrTree tree, char *inputString)
 {
     PtrNode N;
 
@@ -10,16 +10,16 @@ void AddFile(PtrNode current, PtrTree tree, char *inputString)
 
     if(N == NULL)
     {
-        Node *File = MakeNode(current, tree, inputString, 1); // inputType of file is 1
+        Node *File = makeNode(current, tree, inputString, 1); // inputType of file is 1
         
         printf(GREEN);
-        printf("\nNew file '%s' added to the current directory '%s'!\n", inputString, current->name);
+        printf("\n New file '%s' added to the current directory '%s'!\n", inputString, current->name);
         printf(RESET);
     }
 
 }
 
-void AddDirectory(PtrNode current, PtrTree tree, char *inputString)
+void addDirectory(PtrNode current, PtrTree tree, char *inputString)
 {
     PtrNode N;
 
@@ -27,10 +27,10 @@ void AddDirectory(PtrNode current, PtrTree tree, char *inputString)
 
     if(N == NULL)
     {
-        Node *Folder = MakeNode(current, tree, inputString, 0); // inputType of directory is 0
+        Node *Folder = makeNode(current, tree, inputString, 0); // inputType of directory is 0
         
         printf(GREEN);
-        printf("\nNew directory '%s' added to the current directory '%s'!\n", inputString, current->name);
+        printf("\n New directory '%s' added to the current directory '%s'!\n", inputString, current->name);
         printf(RESET);
     }
 }
@@ -57,7 +57,7 @@ PtrNode search(PtrNode current, char *array)
             {
                 //Print error message and return NULL
                 printf(RED);
-                printf("\nError: You are trying to access a file instead of a directory!\n");
+                printf("\n Error: You are trying to access a file instead of a directory!\n");
                 printf(RESET);
 
                 return NULL;
@@ -70,7 +70,7 @@ PtrNode search(PtrNode current, char *array)
 
     // There is no member of linkedlist which has the name as as char string given as input.Print message and return
     printf(RED);
-    printf("Error: There exists no directory named '%s' in parent directory! '%s'\n", array, current->name);
+    printf("\n Error: There exists no directory named '%s' in parent directory '%s'!\n", array, current->name);
     printf(RESET);
     
     return NULL;
@@ -92,7 +92,7 @@ PtrNode search2(PtrNode current, char *array)
             if (head->type == 1)
             {
                 printf(RED);
-                printf("\nError: A file with name '%s' already exists in current directory!\n", head->name);
+                printf("\n Error: A file with name '%s' already exists in current directory!\n", head->name);
                 printf(RESET);
                 
                 return head;
@@ -101,7 +101,7 @@ PtrNode search2(PtrNode current, char *array)
             else
             {
                 printf(RED);
-                printf("\nError: A directory with name '%s' already exists in current directory!", head->name);
+                printf("\n Error: A directory with name '%s' already exists in current directory!", head->name);
                 printf(RESET);
                 
                 return head;
@@ -115,7 +115,7 @@ PtrNode search2(PtrNode current, char *array)
 }
 
 // Changes current directory to any directoryby taking input the complete path to that directory. Handles errors for incorrect paths.
-PtrNode Move(PtrTree Tree, char *inputString)
+PtrNode move(PtrTree Tree, char *inputString)
 {
     char array[10000];
 
@@ -171,18 +171,18 @@ PtrNode Move(PtrTree Tree, char *inputString)
     return current; // Got the desired directory and returned pointer to it
 }
 
-void StoreAlias(PtrTree Tree, char *Address, char *Alias, HT **AliasHashTable)
+void storeAlias(PtrTree Tree, char *Address, char *Alias, HT **AliasHashTable)
 {
     if (searchSepAlias(Alias, AliasHashTable) != NULL)
     {
         printf(RED);
-        printf("\nError: The alias '%s' already exists!\n", Alias);
+        printf("\n Error: The alias '%s' already exists!\n", Alias);
         printf(RESET);
 
         return;
     }
 
-    PtrNode N = Move(Tree, Address);
+    PtrNode N = move(Tree, Address);
     
     if (N == NULL)
         return;
@@ -190,7 +190,7 @@ void StoreAlias(PtrTree Tree, char *Address, char *Alias, HT **AliasHashTable)
     if (N != NULL)
     {
         printf(GREEN);
-        printf("\nThe directory at location '%s' has been stored with alias '%s'!\n", Address, Alias);
+        printf("\n The directory at location '%s' has been stored with alias '%s'!\n", Address, Alias);
         printf(RESET);
     }
     
@@ -203,7 +203,7 @@ void StoreAlias(PtrTree Tree, char *Address, char *Alias, HT **AliasHashTable)
  Calls the search function, to search up the entered alias in the hash table, and moves to the address of the desired alias
 */
 
-PtrNode Teleport(PtrTree Tree, char *alias, HT **AliasHashTable)
+PtrNode teleport(PtrTree Tree, char *alias, HT **AliasHashTable)
 {
     char *NewAddress;
     NewAddress = searchSepAlias(alias, AliasHashTable); // Hash search function implemented in hash.c
@@ -212,7 +212,7 @@ PtrNode Teleport(PtrTree Tree, char *alias, HT **AliasHashTable)
     if (NewAddress == NULL)                             
     {
         printf(RED);
-        printf("\nThe alias '%s' does not exist!\n", alias);
+        printf("\n The alias '%s' does not exist!\n", alias);
         printf(RESET);
 
         return NULL;
@@ -221,32 +221,42 @@ PtrNode Teleport(PtrTree Tree, char *alias, HT **AliasHashTable)
     // When the entered alias exists, the current directory is updated to the address of the entered alias by the Move function
     else 
     {
-        PtrNode directory = Move(Tree, NewAddress);
+        PtrNode directory = move(Tree, NewAddress);
         return directory;
     }
 }
-//Traverse tree is the FIND function which searches strings of directories inside the current directory,
-// and returns the strings that match the prefix.
-//The function aims to return the prefix mathced strings in BFS manner and prints all those present in the current Directory.
-void traverseTree(PtrNode root, char *prefix)//This function provides us all the directory names matching the prefix in the current directory.
+
+/*
+ traverseTree
+ Traverse tree is the FIND function which searches strings of directories inside the current directory,
+ and returns the strings that match the prefix.
+ The function aims to return the prefix mathced strings in BFS manner and prints all those present in the current Directory.
+*/
+// This function provides us all the directory names matching the prefix in the current directory
+void traverseTree(PtrNode root, char *prefix)
 {
-    if (root == NULL)//error handling
+    if (root == NULL) // error handling
         return;
 
     while (root)
     {
-        int m=1;
+        int m = 1;
+
         for (int i = 0; i < strlen(prefix); i++)
         {
-            if (root->name[i] == prefix[i])//matching every single character of both prefix to respective string in Array.
+            // matching every single character of both prefix to respective string in Array
+            if (root->name[i] == prefix[i]) 
             {
                 m++;
             }
-            else //Breaks out of the loop otherwise.
+
+            // Breaks out of the loop otherwise
+            else 
             {
                 break;
             }
         }
+
         if (m == strlen(prefix) + 1)
         {
             if(root->type == 0)
@@ -257,42 +267,56 @@ void traverseTree(PtrNode root, char *prefix)//This function provides us all the
             {
                 printf(YELLOW);
             }
-            printf("%s\n",root->name);//The array string which satisfies.
+            printf("%s\n",root->name); // The array string which satisfies.
             printf(RESET);
         }
-        if (root->FirstChild)//checks if exists.
-            traverseTree(root->FirstChild , prefix);//First Child here refers to the first neighbour of current pointer.
-        root = root->Sibling;//here we do the breadth first search.
+
+        if (root->FirstChild) // checks if exists.
+            traverseTree(root->FirstChild , prefix); // First Child here refers to the first neighbour of current pointer.
+
+        root = root->Sibling; // here we do the breadth first search.
     }
 }
-//The Universal find searches for all the directory and files in the ROOT directory and returns us the ones matching the prefix.
-///The Method is to use a global 2d array to store the name of directories whenever a file or directory is added, and Traversing through it ,
-//which prints the whole list of prefix strings in O(k*N) time, where k is the length of String and N is the number of Directories.
-void find(char STRING[], int n, char Array[][1000])//This function provides us all the directory names matching the prefix in the whole complete manager directory.
+
+/*
+ find:
+ The Universal find searches for all the directory and files in the ROOT directory and returns us the ones matching the prefix.
+ The Method is to use a global 2d array to store the name of directories whenever a file or directory is added, and Traversing through it,
+ which prints the whole list of prefix strings in O(k*N) time, where k is the length of String and N is the number of Directories.
+*/
+// This function provides us all the directory names matching the prefix in the whole complete manager directory
+void find(char STRING[], int n, char Array[][1000]) 
 {
 
     int len = n;
     int j = 0;
-    while (j < 1000) //Size of The Array we are using
-    {
 
+    // Size of The Array we are using
+    while (j < 1000) 
+    {
         int m = 1;
 
         for (int i = 0; i < len; i++)
         {
-            if (Array[j][i] == STRING[i])//matching every single character of both prefix to respective string in Array.
+            // matching every single character of both prefix to respective string in Array
+            if (Array[j][i] == STRING[i]) 
             {
                 m++;
             }
-            else//breaks out of the loop otherwise.
+
+            // breaks out of the loop otherwise
+            else
             {
                 break;
             }
         }
-        if (m == len + 1)//when the value of m has been summed up n times , then only it had been same.
+
+        // when the value of m has been summed up n times, then only it had been same
+        if (m == len + 1)
         {
-            printf("%s\n", Array[j]);//The array string which satisfies.
+            printf("%s\n", Array[j]); // The array string which satisfies
         }
+
         j++;
     }
 }
@@ -331,59 +355,87 @@ void ls(PtrNode root)
     printf("\n");
 }
 
-void Quit()
+void quit()
 {
-    printf("\nGoodbye!\n\n");
+    printf("\n Goodbye!\n\n");
     exit(0);
 }
 
 void printManual()
 {
-    printf("\n\n*********************************************************************************************\n\n");
+    printf("\n\n    ************************************************************************************************************************\n\n");
     
     printf(BOLD);
-    printf(CYAN);
-    printf("Welcome to Directory Manager!\n\n");
+    printf(ORANGE);
+    printf("                                                   Welcome to Directory Manager!\n\n");
     printf(NO_BOLD);
     printf(RESET);
 
-    printf("Choose one of the following options to continue:\n\n");
+    printf("                    Choose one of the following options to continue:\n\n");
 
     printf(BOLD);
-    printf("1. ADD\n");
+    printf("                    1. ADD\n");
     printf(NO_BOLD);
-    printf("Adds a file or directory\n\n");
+    printf("                       Adds a file or directory\n");
+    printf("                       Command: ");
+    printf(LIGHT_PINK);
+    printf("add di/fi <new_name>\n\n");
+    printf(RESET);
 
     printf(BOLD);
-    printf("2. MOVE\n");
+    printf("                    2. MOVE\n");
     printf(NO_BOLD);
-    printf("Changes the current directory to another directory\n\n");
+    printf("                       Changes the current directory to another directory\n");
+    printf("                       Command: ");
+    printf(LIGHT_PINK);
+    printf("move <path_to_destination_directory>\n\n");
+    printf(RESET);
 
     printf(BOLD);
-    printf("3. ALIAS\n");
+    printf("                    3. ALIAS\n");
     printf(NO_BOLD);
-    printf("Saves a directory with an alias\n\n");
+    printf("                       Saves a directory with an alias\n");
+    printf("                       Command: ");
+    printf(LIGHT_PINK);
+    printf("alias <path_to_directory> <new_alias>\n\n");
+    printf(RESET);
 
     printf(BOLD);
-    printf("4. TELEPORT\n");
+    printf("                    4. TELEPORT\n");
     printf(NO_BOLD);
-    printf("Changes the current directory to another directory by taking in an alias\n\n");
+    printf("                       Changes the current directory to another directory by taking in an existing alias\n");
+    printf("                       Command: ");
+    printf(LIGHT_PINK);
+    printf("teleport <existing_alias>\n\n");
+    printf(RESET);
 
     printf(BOLD);
-    printf("5. FIND\n");
+    printf("                    5. FIND\n");
     printf(NO_BOLD);
-    printf("Finds directories and files with a given prefix inside the current directory\n\n");
+    printf("                       Finds directories and files with a given prefix inside the current directory\n");
+    printf("                       Command: ");
+    printf(LIGHT_PINK);
+    printf("find <prefix>\n\n");
+    printf(RESET);
 
     printf(BOLD);
-    printf("6. LS\n");
+    printf("                    6. LS\n");
     printf(NO_BOLD);
-    printf("Lists the contents of the current directory\n\n");
+    printf("                       Lists the contents of the current directory\n");
+    printf("                       Command: ");
+    printf(LIGHT_PINK);
+    printf("ls\n\n");
+    printf(RESET);
     
     printf(BOLD);
-    printf("7. QUIT\n");
+    printf("                    7. QUIT\n");
     printf(NO_BOLD);
-    printf("Exit the program\n\n");
+    printf("                       Exit the program\n");
+    printf("                       Command: ");
+    printf(LIGHT_PINK);
+    printf("quit\n\n");
+    printf(RESET);
 
-  printf("**********************************************************************************************\n\n");
+  printf("    *************************************************************************************************************************\n\n");
   
 }
