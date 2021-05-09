@@ -62,6 +62,16 @@ int main(void)
       // Move the directory to N based on the path inputted
       PtrNode N = move(Tree, path);
 
+      // If we are already in the directory to which the path is inputted, then print an error message and continue
+      if(N == current)
+      {
+        printf(RED);
+        printf("\n Error: You're already in this directory!\n");
+        printf(RESET);
+
+        continue;
+      }
+
       // If the directory exists, then move to the directory and print success message
       if (N != NULL)
       {
