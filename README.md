@@ -8,8 +8,7 @@ Directory-Manager is a program that imitates the traditional bash shell, which a
 
 <br>
 
-* [Tree.h](https://github.com/SwethaVipparla/Directory-Manager/blob/master/Tree.h)
-<br>
+* [Tree.h](https://github.com/SwethaVipparla/Directory-Manager/blob/master/Tree.h) <br>
 `Tree.h` includes all the header files necessary, structures created,
  and the declarations for the functions used in `Tree.c`.
 
@@ -17,8 +16,7 @@ Directory-Manager is a program that imitates the traditional bash shell, which a
 `Tree.c` includes all the function implementations required to 
  create the left child right sibling tree data structure and nodes.
 
-* [hash.h](https://github.com/SwethaVipparla/Directory-Manager/blob/master/hash.h)
-<br>
+* [hash.h](https://github.com/SwethaVipparla/Directory-Manager/blob/master/hash.h) <br>
 `hash.h` includes all the header files necessary, structures created,
  and the declarations for the functions used in `hash.c`.
 
@@ -27,18 +25,15 @@ Directory-Manager is a program that imitates the traditional bash shell, which a
  create and implement the hash table that is used in storing the 
  aliases of the directories.
 
-* [Directory.h](https://github.com/SwethaVipparla/Directory-Manager/blob/master/Directory.h)
-<br>
+* [Directory.h](https://github.com/SwethaVipparla/Directory-Manager/blob/master/Directory.h) <br>
 `Directory.h` includes all the header files necessary, structures created,
  and the declarations for the functions used in `Directory.c`.
 
-* [Directory.c](https://github.com/SwethaVipparla/Directory-Manager/blob/master/Directory.c)
-<br>
+* [Directory.c](https://github.com/SwethaVipparla/Directory-Manager/blob/master/Directory.c) <br>
 `Directory.c` includes all the function implementations required to 
  implement the `add`, `move`, `alias`, `teleport`, `find`, `ls`, and `quit` functionalities.
 
-* [Main.c](https://github.com/SwethaVipparla/Directory-Manager/blob/master/Main.c)
-<br>
+* [Main.c](https://github.com/SwethaVipparla/Directory-Manager/blob/master/Main.c) <br>
 `Main.c` includes the function calls for the various features and menu
  interface. The entire codebase is included in this file.
 
@@ -131,7 +126,7 @@ ls
 <br>
 
 ### 7.  Quit
-Exit the program
+Exits the program
 
 ```
 quit
