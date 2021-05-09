@@ -330,14 +330,14 @@ void lsDirFind(PtrNode root, char *prefix)
 
         if (m == strlen(prefix) + 1)
         {
-            // if(root->type == 0)
-            // {
-            //     printf(LIGHT_PURPLE);
-            // }
-            // else
-            // {
-            //     printf(YELLOW);
-            // }
+            if(root->type == 0)
+            {
+                printf(LIGHT_PURPLE);
+            }
+            else
+            {
+                printf(YELLOW);
+            }
             printf(" %s\n", root->name); // The array string which satisfies.
             printf(RESET);
 
@@ -345,7 +345,6 @@ void lsDirFind(PtrNode root, char *prefix)
 
         root = root->Sibling; // Linked list traversal
     }
-    printf("\n");
 }
 
 /*
