@@ -117,7 +117,7 @@ find <prefix>
 
 <br>
 
-### 6.  Ls
+### 6.  List
 Lists the contents of the current directory
 
 ```
