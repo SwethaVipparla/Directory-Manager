@@ -305,7 +305,7 @@ void directoryFind(PtrNode root, char *prefix)
             // {
             //     printf(YELLOW);
             // }
-            printf("%s\n",root->name); // The array string which satisfies.
+            printf(" %s\n",root->name); // The array string which satisfies.
             printf(RESET);
         }
 
@@ -352,7 +352,7 @@ void managerFind(char STRING[], int n, char Array[][1000])
         // When the value of m has been summed up n times, then only it had been same
         if (m == len + 1)
         {
-            printf("%s\n", Array[j]); // The array string which satisfies
+            printf(" %s\n", Array[j]); // The array string which satisfies
         }
 
         j++;
@@ -385,7 +385,7 @@ void ls(PtrNode root)
         {
             printf(YELLOW);
         }
-        printf("%s   ", root->name);
+        printf(" %s   ", root->name);
         printf(RESET);
 
         root = root->Sibling; // Linked list traversal
