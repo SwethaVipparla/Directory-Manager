@@ -9,7 +9,7 @@
 #define RED "\033[38;5;1m"
 #define GREEN "\033[38;5;121m"
 #define ORANGE "\033[38;5;209m"
-#define PURPLE "\033[38;5;199m"
+#define PURPLE "\033[38;5;205m"
 #define LIGHT_PINK "\033[38;5;225m"
 #define LIGHT_PURPLE "\033[38;5;213m"
 #define YELLOW "\033[38;5;223m"
