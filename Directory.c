@@ -154,29 +154,38 @@ PtrNode move(PtrTree Tree, char *inputString)
     {
         return current;
     }
-    else if (strlen(inputString) < 4)// The first word cannot be root . So an error , because first word is not root.
+
+    // If the first word is not root, output an error
+    else if (strlen(inputString) < 4)
     {
         printf(RED);
-        printf("\n The address you entered is incorrect !");//Prints message
+        printf("\n Error: The address you entered is incorrect!\n"); // Prints message
         printf(RESET);
-        return NULL;//returns NULL pointer
+
+        return NULL; // Returns NULL pointer
     }
+
+    // Check if the first word in address is root
     else
     {
-        //check if the first word in address is root
         char word[5];
         int i = 0;
+
         for (i = 0; i < 4; i++)
         {
             word[i] = inputString[i];
         }
+
         word[i] = '\0';
-        if (strcmp(word, "root") != 0)//if the first word is not root , address is incorrect.
+
+        // If the first word is not root, address is incorrect
+        if (strcmp(word, "root") != 0) 
         {
             printf(RED);
-            printf("\n The address you entered is incorrect !");//Prints message
+            printf("\n Error: The address you entered is incorrect!\n"); // Prints message
             printf(RESET);
-            return NULL;//returns NULL pointer
+
+            return NULL; // Returns NULL pointer
         }
     }
 
@@ -184,7 +193,7 @@ PtrNode move(PtrTree Tree, char *inputString)
     {
         if (inputString[i] == '/')
         {
-            array[j] = '\0'; // completes the string
+            array[j] = '\0'; // Completes the string
 
             // Address is like root/x/y.... till i=4 only root/ is present. This is skipped since pointer to root is already there
             if (i == 4)
@@ -205,7 +214,7 @@ PtrNode move(PtrTree Tree, char *inputString)
             continue;
         }
 
-        array[j] = inputString[i]; // copy characters
+        array[j] = inputString[i]; // Copy characters
 
         // Last character of string has been copied
         if (i == strlen(inputString) - 1)
@@ -353,7 +362,7 @@ void managerFind(char STRING[], int n, char Array[][1000])
     int len = n;
     int j = 0;
 
-    // Size of The Array we are using
+    // Size of the array we are using
     while (j < 1000)
     {
         int m = 1;

@@ -83,7 +83,7 @@ move <path_to_destination_directory>
 
 >  Note:\
 Since the initial directory we're in is "root", the path should be of the form **"root/Directory1/Directory2/..."**<br>
-The function takes you inside the last directory you entered. If incorrect path is entered, no change in the current position is performed.<br>
+The function takes you inside the last directory you entered. You must enter the complete path. If an incorrect path is entered, no change in the current position is performed.<br>
 For example: `move root/Dir1/Dir12/Dir123`
 will move you inside the Dir123 directory.
 
