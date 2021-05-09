@@ -308,6 +308,7 @@ void ls(PtrNode root)
     root = root->FirstChild;
 
     // loops until the end of the linked list
+    printf("\n");
     while(root != NULL) 
     {
         printf("%s   ",root->name);

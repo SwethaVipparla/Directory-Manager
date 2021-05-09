@@ -20,7 +20,7 @@ int main(void)
   
   while (1)
   {
-    printf("\nEnter your choice\n");
+    printf("\n %s > ", current->name);
     scanf("%s", command);
 
     if (strcmp("ADD", command) == 0 || strcmp("Add", command) == 0 || strcmp("add", command) == 0)
