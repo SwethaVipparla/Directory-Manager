@@ -1,0 +1,18 @@
+MOVE root/Desktop
+ADD di Dir1
+ADD di Dir2
+MOVE root/Dir1
+ADD di Dir11
+ADD fi F11
+ADD fi F12
+ADD di Dir12
+FIND Di 
+ALIAS root/Dir1 alias1
+ALIAS root/Dir1/Dir11 alias2
+ADD fi F2
+ADD di Dir1
+Add di Dir1
+TELEPORT alias2
+MOVE root
+ls
+QUIT

@@ -1,0 +1,70 @@
+ADD di DSA
+MOVE root/DSA
+Alias root/DSA DSA
+ADD di Project
+MOVE root/DSA/Project
+Alias root/DSA/Project Project
+ADD di Checkers
+ADD di Bitcoin
+ADD di Directory-Manager
+ADD di Real-Analysis
+ADD di Covid-Tracing
+ADD fi DataStructures
+ADD fi Real-Analysis
+ADD di Directory-Manager
+Alias root/DSA/Project/Directory-Manager Directory
+MOVE root
+TELEPORT Directory
+ADD di Anurag
+ADD di Swetha
+ADD di Sankalp
+ADD di Vidhi
+ADD di Mitul
+Alias root/DSA/Project/Directory-Manager/Anurag Anurag
+TELEPORT Bitcoin
+TELEPORT Anurag
+ADD fi hash.c
+Add fi main.c
+Add di Project
+MOVE root/DSA/Project/Directory-Manager/Anurag/hash.c
+Alias root/DSA/Project/Directory-Manager DSA
+Alias root/DSA/Project/Directory-Manager Manager
+TELEPORT Directory
+TELEPORT Manager
+MOVE root
+TELEPORT root
+Alias root root
+MOVE root/DSA
+TELEPORT root
+TELEPORT Anurag
+TELEPORT root
+TELEPORT Anurag
+TELEPORT root
+TELEPORT Anurag
+TELEPORT root
+TELEPORT Anurag
+TELEPORT root
+TELEPORT Anurag
+TELEPORT root
+TELEPORT Anurag
+TELEPORT root
+TELEPORT Anurag
+TELEPORT root
+TELEPORT Anurag
+TELEPORT root
+TELEPORT Anurag
+TELEPORT root
+TELEPORT Anurag
+ls
+TELEPORT root
+Alias root ROOT
+ls
+TELEPORT DSA
+ls
+TELEPORT Project
+ls
+TELEPORT ROOT
+ls
+TELEPORT root
+ls
+QUIT
