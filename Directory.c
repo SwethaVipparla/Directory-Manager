@@ -296,136 +296,13 @@ PtrNode teleport(PtrTree Tree, char *alias, HT **AliasHashTable)
         return directory;
     }
 }
-
 /*
- directoryFind
- Traverse tree is the FIND function which searches strings of directories inside the current directory,
+ lsDirFind
+ lsDirfind is the FIND function which searches strings of directories inside the current directory,
  and returns the strings that match the prefix.
- The function aims to return the prefix mathced strings in DFS manner and prints all those present in the current Directory.
+ The function aims to return the prefix matched strings and prints all those present in the current Directory.
 */
 // This function provides us all the directory names matching the prefix in the current directory
-void directoryFind(PtrNode root, char *prefix)
-{
-    if (root == NULL) // error handling
-        return;
-
-    while (root)
-    {
-        int m = 1;
-
-        for (int i = 0; i < strlen(prefix); i++)
-        {
-            // matching every single character of both prefix to respective string in Array
-            if (root->name[i] == prefix[i])
-            {
-                m++;
-            }
-
-            // Breaks out of the loop otherwise
-            else
-            {
-                break;
-            }
-        }
-
-        if (m == strlen(prefix) + 1)
-        {
-            // if(root->type == 0)
-            // {
-            //     printf(LIGHT_PURPLE);
-            // }
-            // else
-            // {
-            //     printf(YELLOW);
-            // }
-            printf(" %s\n", root->name); // The array string which satisfies.
-            printf(RESET);
-        }
-
-        if (root->FirstChild)                        // checks if exists.
-            directoryFind(root->FirstChild, prefix); // First Child here refers to the first neighbour of current pointer.(Depth first Call(Recurssion)).
-
-        root = root->Sibling; // here we do the Linked List Traversal.
-    }
-}
-
-/*
- managerFind:
- The Universal managerFind searches for all the directory and files in the ROOT directory and returns us the ones matching the prefix.
- The Method is to use a global 2d array to store the name of directories whenever a file or directory is added, and Traversing through it,
- which prints the whole list of prefix strings in O(k*N) time, where k is the length of String and N is the number of Directories.
-*/
-// This function provides us all the directory names matching the prefix in the whole complete manager directory
-void managerFind(char STRING[], int n, char Array[][1000])
-{
-
-    int len = n;
-    int j = 0;
-
-    // Size of the array we are using
-    while (j < 1000)
-    {
-        int m = 1;
-
-        for (int i = 0; i < len; i++)
-        {
-            // Matching every single character of both prefix to respective string in Array
-            if (Array[j][i] == STRING[i])
-            {
-                m++;
-            }
-
-            // Breaks out of the loop otherwise
-            else
-            {
-                break;
-            }
-        }
-
-        // When the value of m has been summed up n times, then only it had been same
-        if (m == len + 1)
-        {
-            printf(" %s\n", Array[j]); // The array string which satisfies
-        }
-
-        j++;
-    }
-}
-
-/*
- ls:
- Lists the files and directories in the current directory
-*/
-void ls(PtrNode root)
-{
-    // Error handling
-    if (root == NULL) // Directory is empty
-        return;
-
-    root = root->FirstChild;
-
-    printf("\n");
-
-    // Loops until the end of the linked list
-    while (root != NULL)
-    {
-        if (root->type == 0)
-        {
-            printf(LIGHT_PURPLE);
-        }
-        else
-        {
-            printf(YELLOW);
-        }
-        printf(" %s   ", root->name);
-        printf(RESET);
-
-        root = root->Sibling; // Linked list traversal
-    }
-
-    printf("\n");
-}
-
 void lsDirFind(PtrNode root, char *prefix)
 {
     if (root == NULL) // error handling
