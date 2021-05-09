@@ -1,5 +1,6 @@
 # Directory-Manager
 
+<br>
 Directory-Manager is a program that imitates the traditional bash shell, which allows you to manage your files and folders with the basic commands.
 
 &nbsp;
