@@ -83,7 +83,7 @@ int main(void)
         if(strcmp(current->name, N->name) == 0)
         {
           printf(RED);
-          printf("\n Error: You're already in the %s directory!\n", current->name);
+          printf("\n Error: You're already in the '%s' directory!\n", current->name);
           printf(RESET);
         }
 
