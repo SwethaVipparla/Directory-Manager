@@ -137,3 +137,5 @@ Enter your choice
 <br>
 <br>
 
+> Note: Make sure to put a QUIT at the end of test file if taking input via text file.
+
