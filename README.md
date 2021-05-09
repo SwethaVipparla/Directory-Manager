@@ -64,14 +64,15 @@ gcc Main.c -o Main
 ./Main
 ```
 
-### 5. Once the code is up and running, a menu appears, asking for the input corresponding to the function wished to execute. A command can be chosen from the list of features available.
+### 5. Input commands
+Once the code is up and running, a menu appears, asking for the input corresponding to the function wished to execute. A command can be chosen from the list of features available.
 
 &nbsp;
 ## III. Features
 <br>
 
 ### 1.  Add
-Adds a file or directory to the current directory\
+Adds a file or directory to the current directory
 ```
 add di/fi <new_name>
 ```
@@ -80,7 +81,7 @@ add di/fi <new_name>
 <br>
 
 ### 2.  Move
-Changes the current directory to another directory\
+Changes the current directory to another directory
 ```
 move <path_to_destination_directory>
 ```
@@ -94,7 +95,7 @@ will move you inside the Dir123 directory.
 <br>
 
 ### 3.  Alias
-Saves a directory with an alias\
+Saves a directory with an alias
 ```
 alias <path_to_directory> <new_alias>
 ```
@@ -105,7 +106,7 @@ Alias can only be stored for directory addresses, as specified in the document. 
 <br>
 
 ### 4.  Teleport
-Changes the current directory to another directory by taking in an existing alias\
+Changes the current directory to another directory by taking in an existing alias
 ```
 teleport <existing_alias>
 ```
@@ -113,7 +114,7 @@ teleport <existing_alias>
 
 ### 5.  Find
 Finds directories and files with a given prefix inside the current directory
-\
+
 ```
 find <prefix>
 ```
@@ -123,7 +124,7 @@ find <prefix>
 
 ### 6.  Ls
 Lists the contents of the current directory
-\
+
 ```
 ls
 ```
@@ -131,7 +132,7 @@ ls
 
 ### 7.  Quit
 Exit the program
-\
+
 ```
 quit
 ```
