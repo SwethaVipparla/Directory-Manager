@@ -346,6 +346,40 @@ void lsDirFind(PtrNode root, char *prefix)
     }
     printf("\n");
 }
+/*
+ ls:
+ Lists the files and directories in the current directory
+*/
+
+void ls(PtrNode root)
+{
+    // Error handling
+    if (root == NULL) // Directory is empty
+        return;
+
+    root = root->FirstChild;
+
+    printf("\n");
+
+    // Loops until the end of the linked list
+    while (root != NULL)
+    {
+        if (root->type == 0)
+        {
+            printf(LIGHT_PURPLE);
+        }
+        else
+        {
+            printf(YELLOW);
+        }
+        printf(" %s   ", root->name);
+        printf(RESET);
+
+        root = root->Sibling; // Linked list traversal
+    }
+
+    printf("\n");
+}
 
 /*
  quit:
