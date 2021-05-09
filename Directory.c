@@ -16,15 +16,14 @@ void addFile(PtrNode current, PtrTree tree, char *inputString)
 
     N = search2(current, inputString); // Searches if a file with the given name already exists in the current directory and gives an error message accordingly
 
-    if(N == NULL)
+    if (N == NULL)
     {
         Node *File = makeNode(current, tree, inputString, 1); // Makes a node for the file, and inputType of file is 1
-        
+
         printf(GREEN);
         printf("\n New file '%s' added to the current directory '%s'!\n", inputString, current->name);
         printf(RESET);
     }
-
 }
 
 /*
@@ -38,10 +37,10 @@ void addDirectory(PtrNode current, PtrTree tree, char *inputString)
 
     N = search2(current, inputString); // Searches if a directory with the given name already exists in the current directory and gives an error message accordingly
 
-    if(N == NULL)
+    if (N == NULL)
     {
         Node *Folder = makeNode(current, tree, inputString, 0); // Makes a node for the directory, and inputType of file is 1
-        
+
         printf(GREEN);
         printf("\n New directory '%s' added to the current directory '%s'!\n", inputString, current->name);
         printf(RESET);
@@ -62,12 +61,12 @@ PtrNode search(PtrNode current, char *array)
 
     PtrNode head = current->FirstChild; // Pointer to first member of linked list of children . Might be NULL
 
-    // Traversing through the linked list to search for desired directory                                    
+    // Traversing through the linked list to search for desired directory
     while (head != NULL)
     {
-        if (strcmp(head->name, array) == 0)//Names matched
+        if (strcmp(head->name, array) == 0) //Names matched
         {
-            if (head->type == 1) // If there exists a file with the given name 
+            if (head->type == 1) // If there exists a file with the given name
             {
                 //Print error message and return NULL
                 printf(RED);
@@ -86,7 +85,7 @@ PtrNode search(PtrNode current, char *array)
     printf(RED);
     printf("\n Error: There exists no directory named '%s' in parent directory '%s'!\n", array, current->name);
     printf(RESET);
-    
+
     return NULL;
 }
 
@@ -118,7 +117,7 @@ PtrNode search2(PtrNode current, char *array)
                 printf(RED);
                 printf("\n Error: A file with name '%s' already exists in current directory!\n", head->name);
                 printf(RESET);
-                
+
                 return head;
             }
 
@@ -128,7 +127,7 @@ PtrNode search2(PtrNode current, char *array)
                 printf(RED);
                 printf("\n Error: A directory with name '%s' already exists in current directory!", head->name);
                 printf(RESET);
-                
+
                 return head;
             }
         }
@@ -151,16 +150,41 @@ PtrNode move(PtrTree Tree, char *inputString)
 
     PtrNode current = Tree->root; // Pointer to root directory
 
-    if (strcmp(inputString, "root") == 0) // If address of root is given we return pointer to root 
+    if (strcmp(inputString, "root") == 0) // If address of root is given we return pointer to root
     {
         return current;
+    }
+    else if (strlen(inputString) < 4)// The first word cannot be root . So an error , because first word is not root.
+    {
+        printf(RED);
+        printf("\n The address you entered is incorrect !");//Prints message
+        printf(RESET);
+        return NULL;//returns NULL pointer
+    }
+    else
+    {
+        //check if the first word in address is root
+        char word[5];
+        int i = 0;
+        for (i = 0; i < 4; i++)
+        {
+            word[i] = inputString[i];
+        }
+        word[i] = '\0';
+        if (strcmp(word, "root") != 0)//if the first word is not root , address is incorrect.
+        {
+            printf(RED);
+            printf("\n The address you entered is incorrect !");//Prints message
+            printf(RESET);
+            return NULL;//returns NULL pointer
+        }
     }
 
     for (int i = 0, j = 0; i < strlen(inputString); i++, j++)
     {
         if (inputString[i] == '/')
         {
-            array[j] = '\0'; // completes the string 
+            array[j] = '\0'; // completes the string
 
             // Address is like root/x/y.... till i=4 only root/ is present. This is skipped since pointer to root is already there
             if (i == 4)
@@ -191,7 +215,7 @@ PtrNode move(PtrTree Tree, char *inputString)
             current = search(current, array); // Returns pointer to one of the children(if it exists) of current with name as that of array string
 
             // Message has been printed in search
-            if (current == NULL) 
+            if (current == NULL)
             {
                 return NULL;
             }
@@ -219,11 +243,11 @@ void storeAlias(PtrTree Tree, char *Address, char *Alias, HT **AliasHashTable)
     }
 
     PtrNode N = move(Tree, Address);
-     // Move function here verifies if the address is valid or not
-    
+    // Move function here verifies if the address is valid or not
+
     if (N == NULL)
         return;
-    
+
     if (N != NULL)
     {
         printf(GREEN);
@@ -245,9 +269,9 @@ PtrNode teleport(PtrTree Tree, char *alias, HT **AliasHashTable)
 {
     char *NewAddress;
     NewAddress = searchSepAlias(alias, AliasHashTable); // Hash search function implemented in hash.c
-    
+
     // Error handling: for when the entered alias is not found in the hash table
-    if (NewAddress == NULL)                             
+    if (NewAddress == NULL)
     {
         printf(RED);
         printf("\n Error: The alias '%s' does not exist!\n", alias);
@@ -257,7 +281,7 @@ PtrNode teleport(PtrTree Tree, char *alias, HT **AliasHashTable)
     }
 
     // When the entered alias exists, the current directory is updated to the address of the entered alias by the Move function
-    else 
+    else
     {
         PtrNode directory = move(Tree, NewAddress);
         return directory;
@@ -283,13 +307,13 @@ void directoryFind(PtrNode root, char *prefix)
         for (int i = 0; i < strlen(prefix); i++)
         {
             // matching every single character of both prefix to respective string in Array
-            if (root->name[i] == prefix[i]) 
+            if (root->name[i] == prefix[i])
             {
                 m++;
             }
 
             // Breaks out of the loop otherwise
-            else 
+            else
             {
                 break;
             }
@@ -301,16 +325,16 @@ void directoryFind(PtrNode root, char *prefix)
             // {
             //     printf(LIGHT_PURPLE);
             // }
-            // else 
+            // else
             // {
             //     printf(YELLOW);
             // }
-            printf(" %s\n",root->name); // The array string which satisfies.
+            printf(" %s\n", root->name); // The array string which satisfies.
             printf(RESET);
         }
 
-        if (root->FirstChild) // checks if exists.
-            directoryFind(root->FirstChild , prefix); // First Child here refers to the first neighbour of current pointer.
+        if (root->FirstChild)                        // checks if exists.
+            directoryFind(root->FirstChild, prefix); // First Child here refers to the first neighbour of current pointer.
 
         root = root->Sibling; // here we do the breadth first search.
     }
@@ -323,21 +347,21 @@ void directoryFind(PtrNode root, char *prefix)
  which prints the whole list of prefix strings in O(k*N) time, where k is the length of String and N is the number of Directories.
 */
 // This function provides us all the directory names matching the prefix in the whole complete manager directory
-void managerFind(char STRING[], int n, char Array[][1000]) 
+void managerFind(char STRING[], int n, char Array[][1000])
 {
 
     int len = n;
     int j = 0;
 
     // Size of The Array we are using
-    while (j < 1000) 
+    while (j < 1000)
     {
         int m = 1;
 
         for (int i = 0; i < len; i++)
         {
             // Matching every single character of both prefix to respective string in Array
-            if (Array[j][i] == STRING[i]) 
+            if (Array[j][i] == STRING[i])
             {
                 m++;
             }
@@ -359,7 +383,6 @@ void managerFind(char STRING[], int n, char Array[][1000])
     }
 }
 
-
 /*
  ls:
  Lists the files and directories in the current directory
@@ -367,21 +390,21 @@ void managerFind(char STRING[], int n, char Array[][1000])
 void ls(PtrNode root)
 {
     // Error handling
-    if(root == NULL) // Directory is empty
+    if (root == NULL) // Directory is empty
         return;
-    
+
     root = root->FirstChild;
 
     printf("\n");
 
     // Loops until the end of the linked list
-    while(root != NULL) 
+    while (root != NULL)
     {
-        if(root->type == 0)
+        if (root->type == 0)
         {
             printf(LIGHT_PURPLE);
         }
-        else 
+        else
         {
             printf(YELLOW);
         }
@@ -412,7 +435,7 @@ void quit()
 void printManual()
 {
     printf("\n\n    ************************************************************************************************************************\n\n");
-    
+
     printf(BOLD);
     printf(ORANGE);
     printf("                                                   Welcome to Directory Manager!\n\n");
@@ -474,7 +497,7 @@ void printManual()
     printf(LIGHT_PINK);
     printf("ls\n\n");
     printf(RESET);
-    
+
     printf(BOLD);
     printf("                    7. QUIT\n");
     printf(NO_BOLD);
@@ -484,5 +507,5 @@ void printManual()
     printf("quit\n\n");
     printf(RESET);
 
-  printf("    *************************************************************************************************************************\n\n");
+    printf("    *************************************************************************************************************************\n\n");
 }
