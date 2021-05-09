@@ -12,6 +12,7 @@ ADD di Covid-Tracing
 ADD fi DataStructures
 ADD fi Real-Analysis
 ADD di Directory-Manager
+ADD fi Directory-Manager
 Alias root/DSA/Project/Directory-Manager Directory
 MOVE root
 TELEPORT Directory

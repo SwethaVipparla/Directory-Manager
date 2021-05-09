@@ -426,6 +426,50 @@ void ls(PtrNode root)
     printf("\n");
 }
 
+void lsDirFind(PtrNode root, char *prefix)
+{
+    if (root == NULL) // error handling
+        return;
+
+    while (root)
+    {
+        int m = 1;
+
+        for (int i = 0; i < strlen(prefix); i++)
+        {
+            // matching every single character of both prefix to respective string in Array
+            if (root->name[i] == prefix[i])
+            {
+                m++;
+            }
+
+            // Breaks out of the loop otherwise
+            else
+            {
+                break;
+            }
+        }
+
+        if (m == strlen(prefix) + 1)
+        {
+            // if(root->type == 0)
+            // {
+            //     printf(LIGHT_PURPLE);
+            // }
+            // else
+            // {
+            //     printf(YELLOW);
+            // }
+            printf(" %s\n", root->name); // The array string which satisfies.
+            printf(RESET);
+
+        }
+
+        root = root->Sibling; // Linked list traversal
+    }
+    printf("\n");
+}
+
 /*
  quit:
  Quits the program and prints a goodbye message

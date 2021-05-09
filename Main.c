@@ -45,9 +45,18 @@ int main(void)
       }
 
       // If the type is file, then call the addFile function
-      if (strcmp("fi", type) == 0 || strcmp("Fi", type) == 0 || strcmp("FI", type) == 0)
+      else if (strcmp("fi", type) == 0 || strcmp("Fi", type) == 0 || strcmp("FI", type) == 0)
       {
         addFile(current, Tree, Elements[i]);
+      }
+
+      else
+      {
+        Elements[i][0] = '\0';
+        
+        printf(RED);
+        printf("\n Error: Please enter a valid command to proceed!\n");
+        printf(RESET);      
       }
 
       i++;
@@ -56,7 +65,7 @@ int main(void)
     // Implement the 'move' functionality
     else if (strcmp("MOVE", command) == 0 || strcmp("Move", command) == 0 || strcmp("move", command) == 0)
     {
-      char path[1000];
+      char path[10000];
       scanf(" %s", path);
 
       // Move the directory to N based on the path inputted
@@ -86,7 +95,7 @@ int main(void)
     // Implement the 'alias' functionality
     else if (strcmp("ALIAS", command) == 0 || strcmp("Alias", command) == 0 || strcmp("alias", command) == 0)
     {
-      char alias[1000], path[1000];
+      char alias[1000], path[10000];
       scanf("%s %s", path, alias);
 
       // Store the alias in the hashtable based on the path
@@ -134,11 +143,12 @@ int main(void)
       printf("\n In current directory:\n\n");
 
       // Find files/directories with the given prefix in the current directory
-      directoryFind(current->FirstChild, prefix);
+      // directoryFind(current->FirstChild, prefix);
+      lsDirFind(current->FirstChild, prefix);
 
       // Find files/directories with the given prefix in the complete directory manager
-      printf("\n\n In complete directory manager:\n\n");
-      managerFind(prefix, strlen(prefix), Elements);
+      // printf("\n\n In complete directory manager:\n\n");
+      // managerFind(prefix, strlen(prefix), Elements);
     }
 
     // Implement the 'ls' functionality
