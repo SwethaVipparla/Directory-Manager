@@ -208,7 +208,7 @@ PtrNode Teleport(PtrTree Tree, char *alias, HT **AliasHashTable)
     char *NewAddress;
     NewAddress = searchSepAlias(alias, AliasHashTable); // Hash search function implemented in hash.c
     
-    // Error handling : for when the entered alias is not found in the hash table
+    // Error handling: for when the entered alias is not found in the hash table
     if (NewAddress == NULL)                             
     {
         printf(RED);
@@ -225,75 +225,69 @@ PtrNode Teleport(PtrTree Tree, char *alias, HT **AliasHashTable)
         return directory;
     }
 }
-
-void traverseTree(PtrNode root, char *prefix)
+//Traverse tree is the FIND function which searches strings of directories inside the current directory,
+// and returns the strings that match the prefix.
+//The function aims to return the prefix mathced strings in BFS manner and prints all those present in the current Directory.
+void traverseTree(PtrNode root, char *prefix)//This function provides us all the directory names matching the prefix in the current directory.
 {
-    if (root == NULL)
+    if (root == NULL)//error handling
         return;
 
     while (root)
     {
-        int m = 1;
-        
+        int m=1;
         for (int i = 0; i < strlen(prefix); i++)
         {
-            if (root->name[i] == prefix[i])
+            if (root->name[i] == prefix[i])//matching every single character of both prefix to respective string in Array.
             {
                 m++;
             }
-            
-            else
+            else //Breaks out of the loop otherwise.
             {
                 break;
             }
         }
-        
         if (m == strlen(prefix) + 1)
         {
-            printf("%s\n", root->name);
+            printf("%s\n",root->name);//The array string which satisfies.
         }
-        
-        if (root->FirstChild)
-            traverseTree(root->FirstChild, prefix);
-        
-        root = root->Sibling;
+        if (root->FirstChild)//checks if exists.
+            traverseTree(root->FirstChild , prefix);//First Child here refers to the first neighbour of current pointer.
+        root = root->Sibling;//here we do the breadth first search.
     }
 }
-
-void find(char STRING[], int n, char Array[][1000])
+//The Universal find searches for all the directory and files in the ROOT directory and returns us the ones matching the prefix.
+///The Method is to use a global 2d array to store the name of directories whenever a file or directory is added, and Traversing through it ,
+//which prints the whole list of prefix strings in O(k*N) time, where k is the length of String and N is the number of Directories.
+void find(char STRING[], int n, char Array[][1000])//This function provides us all the directory names matching the prefix in the whole complete manager directory.
 {
 
     int len = n;
-    //hash_for_find[];
     int j = 0;
-    
-    while (j < 1000) //Number of inputs
+    while (j < 1000) //Size of The Array we are using
     {
 
         int m = 1;
 
         for (int i = 0; i < len; i++)
         {
-            if (Array[j][i] == STRING[i])
+            if (Array[j][i] == STRING[i])//matching every single character of both prefix to respective string in Array.
             {
                 m++;
             }
-            
-            else
+            else//breaks out of the loop otherwise.
             {
                 break;
             }
         }
-        
-        if (m == len + 1)
+        if (m == len + 1)//when the value of m has been summed up n times , then only it had been same.
         {
-            printf("%s\n", Array[j]);
+            printf("%s\n", Array[j]);//The array string which satisfies.
         }
-        
         j++;
     }
-    //optimiztion can be done with the while loop as for how many times to run it
 }
+
 
 /*
  ls:
