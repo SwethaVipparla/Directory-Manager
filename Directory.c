@@ -296,6 +296,7 @@ PtrNode teleport(PtrTree Tree, char *alias, HT **AliasHashTable)
         return directory;
     }
 }
+
 /*
  lsDirFind
  lsDirfind is the FIND function which searches strings of directories inside the current directory,
@@ -346,11 +347,11 @@ void lsDirFind(PtrNode root, char *prefix)
     }
     printf("\n");
 }
+
 /*
  ls:
  Lists the files and directories in the current directory
 */
-
 void ls(PtrNode root)
 {
     // Error handling
